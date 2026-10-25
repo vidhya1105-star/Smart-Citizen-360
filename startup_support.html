@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Startup Support</title>
+
+    <style>
+        *{
+            box-sizing:border-box;
+        }
+
+        body{
+            margin:0;
+            font-family:Arial,sans-serif;
+            background:#f4f8ff;
+            color:#1e293b;
+        }
+
+        .container{
+            width:92%;
+            max-width:1100px;
+            margin:30px auto;
+        }
+
+        .hero{
+            background:linear-gradient(135deg,#2563eb,#4f46e5);
+            color:white;
+            padding:30px;
+            border-radius:20px;
+            margin-bottom:25px;
+        }
+
+        .hero h1{
+            margin:0 0 10px;
+            font-size:32px;
+        }
+
+        .hero p{
+            margin:0;
+            line-height:1.5;
+        }
+
+        .info-card{
+            background:white;
+            padding:25px;
+            border-radius:18px;
+            margin-bottom:20px;
+            box-shadow:0 8px 20px rgba(0,0,0,.08);
+        }
+
+        .info-card h2{
+            color:#1d4ed8;
+            margin-top:0;
+        }
+
+        .support-card{
+            background:#f8fbff;
+            border-left:6px solid #2563eb;
+            padding:20px;
+            border-radius:15px;
+            margin-top:18px;
+        }
+
+        .support-card h3{
+            color:#1d4ed8;
+            margin-top:0;
+        }
+
+        .support-card p{
+            line-height:1.6;
+            color:#475569;
+        }
+
+        .apply-btn{
+            display:inline-block;
+            margin-top:10px;
+            padding:11px 18px;
+            background:#2563eb;
+            color:white;
+            text-decoration:none;
+            border-radius:9px;
+            font-weight:bold;
+        }
+
+        .apply-btn:hover{
+            background:#1d4ed8;
+        }
+
+        ul,ol{
+            line-height:1.8;
+        }
+    </style>
+</head>
+
+<body>
+
+{% include "navbar.html" %}
+
+<div class="container">
+
+    <div class="hero">
+
+        <h1>🚀 Startup Support Assistant</h1>
+
+        <p>
+            Explore startup registration, government support,
+            incubation and funding opportunities for entrepreneurs.
+        </p>
+
+    </div>
+
+
+    <div class="info-card">
+
+        <h2>🚀 Startup Support Options</h2>
+
+
+        <div class="support-card">
+
+            <h3>🇮🇳 Startup India</h3>
+
+            <p>
+                Startup India provides support for eligible
+                startups including recognition, ecosystem
+                support and access to various government
+                initiatives.
+            </p>
+
+            <a href="https://www.startupindia.gov.in/"
+               target="_blank"
+               class="apply-btn">
+                🚀 Visit Official Website
+            </a>
+
+        </div>
+
+
+        <div class="support-card">
+
+            <h3>💡 Startup India Seed Fund Scheme</h3>
+
+            <p>
+                Provides eligible startups with support for
+                proof of concept, prototype development,
+                product trials and market entry through
+                approved incubators.
+            </p>
+
+            <a href="https://www.startupindia.gov.in/"
+               target="_blank"
+               class="apply-btn">
+                🌐 Learn More
+            </a>
+
+        </div>
+
+
+        <div class="support-card">
+
+            <h3>🏢 Incubation Support</h3>
+
+            <p>
+                Incubators can provide mentoring, networking,
+                workspace and other support to eligible
+                startups.
+            </p>
+
+            <a href="https://www.startupindia.gov.in/"
+               target="_blank"
+               class="apply-btn">
+                🔎 Explore Support
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="info-card">
+
+        <h2>📄 Commonly Required Information</h2>
+
+        <ul>
+            <li>Identity Proof</li>
+            <li>PAN Details</li>
+            <li>Business / Startup Details</li>
+            <li>Business Plan or Pitch Deck</li>
+            <li>Company / LLP Registration Details, where applicable</li>
+            <li>Bank Account Details</li>
+            <li>Financial Information, where applicable</li>
+        </ul>
+
+    </div>
+
+
+    <div class="info-card">
+
+        <h2>📌 Basic Process</h2>
+
+        <ol>
+            <li>Develop your startup idea and business plan.</li>
+            <li>Choose the appropriate business structure.</li>
+            <li>Complete the required registration.</li>
+            <li>Check eligibility for startup support programs.</li>
+            <li>Apply through the relevant official portal.</li>
+        </ol>
+
+    </div>
+
+</div>
+
+</body>
+</html>

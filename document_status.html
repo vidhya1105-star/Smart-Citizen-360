@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Document Status</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+
+        .status-container {
+            width: 80%;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        .status-container h1 {
+            text-align: center;
+            color: #1769c2;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background: #1769c2;
+            color: white;
+        }
+
+        .expired {
+            color: red;
+            font-weight: bold;
+        }
+
+        .valid {
+            color: green;
+            font-weight: bold;
+        }
+
+        .soon {
+            color: orange;
+            font-weight: bold;
+        }
+
+        .unknown {
+            color: #777;
+            font-weight: bold;
+        }
+
+        .back-btn {
+            display: block;
+            width: 200px;
+            margin: 25px auto 0;
+            padding: 12px;
+            text-align: center;
+            background: #1769c2;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+
+<div class="status-container">
+
+    <h1>Document Status</h1>
+
+    <table>
+
+        <tr>
+            <th>Document</th>
+            <th>Expiry Date</th>
+            <th>Status</th>
+        </tr>
+
+        {% for doc in documents %}
+
+        <tr>
+
+            <td>
+                {{ doc.document_name }}
+            </td>
+
+            <td>
+
+                {% if doc.expiry_date %}
+                    {{ doc.expiry_date.strftime('%d-%m-%Y') }}
+                {% else %}
+                    Not Detected
+                {% endif %}
+
+            </td>
+
+            <td>
+
+                {% if doc.status == "Expired" %}
+
+                    <span class="expired">
+                        ❌ Expired
+                    </span>
+
+                {% elif doc.status == "Valid" %}
+
+                    <span class="valid">
+                        ✅ Valid
+                    </span>
+
+                {% elif doc.status == "Expiring Soon" %}
+
+                    <span class="soon">
+                        ⚠️ Expiring Soon
+                    </span>
+
+                {% elif doc.status == "Expires Today" %}
+
+                    <span class="expired">
+                        ⚠️ Expires Today
+                    </span>
+
+                {% else %}
+
+                    <span class="unknown">
+                        ⏳ Expiry Date Not Found
+                    </span>
+
+                {% endif %}
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+    <a href="/dashboard" class="back-btn">
+        Back to Dashboard
+    </a>
+
+</div>
+
+</body>
+</html>

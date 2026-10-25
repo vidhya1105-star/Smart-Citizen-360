@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | Smart Citizen 360</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        body{
+            margin:0;
+            font-family:'Segoe UI',sans-serif;
+            background:linear-gradient(135deg,#EEF2FF,#F5F3FF,#FFFFFF);
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:30px;
+        }
+
+        .register-card{
+            width:100%;
+            max-width:1100px;
+            background:#fff;
+            border-radius:28px;
+            overflow:hidden;
+            display:grid;
+            grid-template-columns:42% 58%;
+            box-shadow:0 20px 45px rgba(79,70,229,.15);
+        }
+
+        /* LEFT */
+        .left-side{
+            background:linear-gradient(180deg,#4F46E5,#6D28D9);
+            color:white;
+            padding:40px 30px;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            text-align:center;
+        }
+
+        .left-side img{
+            width:220px;
+            margin-bottom:25px;
+        }
+
+        .left-side h2{
+            margin:0;
+            font-size:28px;
+        }
+
+        .left-side p{
+            margin-top:12px;
+            line-height:1.6;
+            color:#EDE9FE;
+        }
+
+        /* RIGHT */
+        .right-side{
+            padding:35px 40px;
+        }
+
+        .right-side h2{
+            color:#312E81;
+            margin-bottom:5px;
+        }
+
+        .right-side p{
+            color:#64748B;
+            margin-bottom:25px;
+        }
+
+        .form-grid{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:18px;
+        }
+
+        .input-group{
+            display:flex;
+            flex-direction:column;
+        }
+
+        .input-group label{
+            font-weight:600;
+            margin-bottom:6px;
+            color:#334155;
+            font-size:14px;
+        }
+
+        .input-group input,
+        .input-group select{
+            padding:12px;
+            border-radius:10px;
+            border:1px solid #CBD5E1;
+            background:#F8FAFC;
+            font-size:14px;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus{
+            outline:none;
+            border-color:#6D28D9;
+            background:white;
+            box-shadow:0 0 0 3px rgba(109,40,217,.12);
+        }
+
+        .full{
+            grid-column:1/3;
+        }
+
+        .checkbox-row{
+            margin-top:18px;
+            font-size:14px;
+            color:#475569;
+        }
+
+        .register-btn{
+            width:100%;
+            margin-top:20px;
+            padding:14px;
+            border:none;
+            border-radius:12px;
+            background:linear-gradient(90deg,#6D28D9,#4F46E5);
+            color:white;
+            font-size:16px;
+            font-weight:bold;
+            cursor:pointer;
+        }
+
+        .register-btn:hover{
+            transform:translateY(-2px);
+        }
+
+        .login-link{
+            margin-top:18px;
+            text-align:center;
+            color:#64748B;
+        }
+
+        .login-link a{
+            color:#6D28D9;
+            font-weight:bold;
+            text-decoration:none;
+        }
+
+        /* Password Eye Icon */
+.password-box{
+    position: relative;
+}
+
+.password-box input{
+    padding-right: 45px;
+}
+
+.eye-btn{
+    position: absolute;
+    right: 15px;
+    top: 42px;
+    cursor: pointer;
+    font-size: 18px;
+    color: #64748B;
+    user-select: none;
+}
+
+.eye-btn:hover{
+    color: #6D28D9;
+}
+
+/* Caps Lock Warning */
+.caps-warning{
+    display: none;
+    color: #DC2626;
+    font-size: 13px;
+    margin-top: 6px;
+    font-weight: 600;
+}
+
+        @media(max-width:768px){
+            .register-card{
+                grid-template-columns:1fr;
+            }
+
+            .left-side{
+                display:none;
+            }
+
+            .form-grid{
+                grid-template-columns:1fr;
+            }
+
+            .full{
+                grid-column:1/2;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="register-card">
+
+    <!-- LEFT SIDE -->
+    <div class="left-side">
+
+        <img src="{{ url_for('static', filename='images/login-hero.png') }}">
+
+        <h2>Smart Citizen 360</h2>
+
+        <p>
+            Join Smart Citizen 360 and access government services,
+            document locker, AI chatbot and scheme recommendations.
+        </p>
+
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="right-side">
+
+        <h2>Create Your Account</h2>
+
+        <p>Complete your citizen details to create your account.</p>
+
+        <form method="POST">
+
+            <div class="form-grid">
+
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" name="fullname" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Date of Birth</label>
+                    <input type="date" name="dob" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Gender</label>
+                    <select name="gender" required>
+                        <option value="">Select Gender</option>
+                        <option>Female</option>
+                        <option>Male</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+    <label>Education</label>
+
+    <select name="education" required>
+        <option value="">Select Education</option>
+
+        <option value="Below 10th">Below 10th</option>
+        <option value="10th Pass">10th Pass</option>
+        <option value="12th Pass">12th Pass</option>
+        <option value="Diploma">Diploma</option>
+        <option value="ITI">ITI</option>
+
+        <option value="UG Student">UG Student</option>
+        <option value="BCA">BCA</option>
+        <option value="B.Sc">B.Sc</option>
+        <option value="B.Com">B.Com</option>
+        <option value="B.A">B.A</option>
+        <option value="B.E / B.Tech">B.E / B.Tech</option>
+
+        <option value="PG Student">PG Student</option>
+        <option value="MCA">MCA</option>
+        <option value="MBA">MBA</option>
+        <option value="M.Sc">M.Sc</option>
+        <option value="M.Com">M.Com</option>
+        <option value="M.A">M.A</option>
+
+        <option value="PhD">PhD</option>
+        <option value="Other">Other</option>
+    </select>
+</div>
+
+<div class="input-group">
+    <label>Occupation</label>
+
+    <select name="occupation" required>
+        <option value="">Select Occupation</option>
+
+        <option value="Student">Student</option>
+        <option value="Government Employee">Government Employee</option>
+        <option value="Private Employee">Private Employee</option>
+        <option value="Self Employed">Self Employed</option>
+        <option value="Business Owner">Business Owner</option>
+        <option value="Farmer">Farmer</option>
+        <option value="Daily Wage Worker">Daily Wage Worker</option>
+        <option value="Labourer">Labourer</option>
+        <option value="Homemaker">Homemaker</option>
+        <option value="Unemployed">Unemployed</option>
+        <option value="Retired">Retired</option>
+        <option value="Freelancer">Freelancer</option>
+        <option value="Other">Other</option>
+    </select>
+</div>
+
+<div class="input-group">
+    <label>Marital Status</label>
+
+    <select name="marital_status" required>
+        <option value="">Select Marital Status</option>
+        <option value="Single">Single</option>
+        <option value="Married">Married</option>
+        <option value="Widow/Widower">Widow / Widower</option>
+        <option value="Divorced">Divorced</option>
+        <option value="Separated">Separated</option>
+    </select>
+</div>
+
+<div class="input-group full">
+    <label>Annual Family Income</label>
+
+    <select name="income" required>
+        <option value="">Select Income Range</option>
+
+        <option value="Below 50000">Below ₹50,000</option>
+        <option value="50000-100000">₹50,000 – ₹1,00,000</option>
+        <option value="100000-250000">₹1,00,000 – ₹2,50,000</option>
+        <option value="250000-300000">₹2,50,000 – ₹3,00,000</option>
+        <option value="300000-500000">₹3,00,000 – ₹5,00,000</option>
+        <option value="500000-800000">₹5,00,000 – ₹8,00,000</option>
+        <option value="800000-1000000">₹8,00,000 – ₹10,00,000</option>
+        <option value="1000000-1500000">₹10,00,000 – ₹15,00,000</option>
+        <option value="Above 1500000">Above ₹15,00,000</option>
+    </select>
+</div>
+
+                <div class="input-group">
+                    <label>Mobile Number</label>
+                    <input type="text" name="mobile" maxlength="10" required>
+                </div>
+
+                <div class="input-group">
+    <label>State</label>
+
+    <select name="state" id="state" onchange="loadDistricts()" required>
+        <option value="">Select State</option>
+
+        <option value="Andhra Pradesh">Andhra Pradesh</option>
+        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+        <option value="Assam">Assam</option>
+        <option value="Bihar">Bihar</option>
+        <option value="Chhattisgarh">Chhattisgarh</option>
+        <option value="Goa">Goa</option>
+        <option value="Gujarat">Gujarat</option>
+        <option value="Haryana">Haryana</option>
+        <option value="Himachal Pradesh">Himachal Pradesh</option>
+        <option value="Jharkhand">Jharkhand</option>
+        <option value="Karnataka">Karnataka</option>
+        <option value="Kerala">Kerala</option>
+        <option value="Madhya Pradesh">Madhya Pradesh</option>
+        <option value="Maharashtra">Maharashtra</option>
+        <option value="Manipur">Manipur</option>
+        <option value="Meghalaya">Meghalaya</option>
+        <option value="Mizoram">Mizoram</option>
+        <option value="Nagaland">Nagaland</option>
+        <option value="Odisha">Odisha</option>
+        <option value="Punjab">Punjab</option>
+        <option value="Rajasthan">Rajasthan</option>
+        <option value="Sikkim">Sikkim</option>
+        <option value="Tamil Nadu">Tamil Nadu</option>
+        <option value="Telangana">Telangana</option>
+        <option value="Tripura">Tripura</option>
+        <option value="Uttar Pradesh">Uttar Pradesh</option>
+        <option value="Uttarakhand">Uttarakhand</option>
+        <option value="West Bengal">West Bengal</option>
+    </select>
+</div>
+
+<div class="input-group">
+    <label>District</label>
+
+    <select name="district" id="district" required>
+        <option value="">Select District</option>
+    </select>
+</div>
+
+                <div class="input-group full">
+                    <label>Email Address</label>
+                    <input type="email" name="email" required>
+                </div>
+
+                <div class="input-group full password-box">
+    <label>Password</label>
+
+    <input type="password"
+           id="password"
+           name="password"
+           required>
+
+    <span class="eye-btn"
+          onclick="togglePassword('password', this)">
+        👁️
+    </span>
+
+    <p id="caps-warning-password" class="caps-warning">
+        ⚠️ Caps Lock is ON
+    </p>
+</div>
+
+                <div class="input-group full password-box">
+    <label>Confirm Password</label>
+
+    <input type="password"
+           id="confirm_password"
+           name="confirm_password"
+           required>
+
+    <span class="eye-btn"
+          onclick="togglePassword('confirm_password', this)">
+        👁️
+    </span>
+
+    <p id="caps-warning-confirm" class="caps-warning">
+        ⚠️ Caps Lock is ON
+    </p>
+</div>
+            </div>
+
+            <div class="checkbox-row">
+                <input type="checkbox" required>
+                I agree to the Terms & Privacy Policy.
+            </div>
+
+            <button type="submit" class="register-btn">
+                Register
+            </button>
+
+        </form>
+
+        <div class="login-link">
+            Already have an account?
+            <a href="/login">Login</a>
+        </div>
+
+    </div>
+
+</div>
+<script>
+const districts = {
+
+"Tamil Nadu":[
+"Ariyalur","Chengalpattu","Chennai","Coimbatore","Cuddalore","Dharmapuri","Dindigul","Erode","Kallakurichi","Kancheepuram","Karur","Krishnagiri","Madurai","Mayiladuthurai","Nagapattinam","Namakkal","Nilgiris","Perambalur","Pudukkottai","Ramanathapuram","Ranipet","Salem","Sivaganga","Tenkasi","Thanjavur","Theni","Thoothukudi","Tiruchirappalli","Tirunelveli","Tirupathur","Tiruppur","Tiruvallur","Tiruvannamalai","Tiruvarur","Vellore","Viluppuram","Virudhunagar"
+],
+
+"Kerala":[
+"Alappuzha","Ernakulam","Idukki","Kannur","Kasaragod","Kollam","Kottayam","Kozhikode","Malappuram","Palakkad","Pathanamthitta","Thiruvananthapuram","Thrissur","Wayanad"
+],
+
+"Karnataka":[
+"Bagalkot","Ballari","Belagavi","Bengaluru Rural","Bengaluru Urban","Bidar","Chamarajanagar","Chikkaballapur","Chikkamagaluru","Chitradurga","Dakshina Kannada","Davanagere","Dharwad","Gadag","Hassan","Haveri","Kalaburagi","Kodagu","Kolar","Koppal","Mandya","Mysuru","Raichur","Ramanagara","Shivamogga","Tumakuru","Udupi","Uttara Kannada","Vijayapura","Yadgir"
+],
+
+"Andhra Pradesh":[
+"Anakapalli","Anantapur","Bapatla","Chittoor","East Godavari","Eluru","Guntur","Kakinada","Krishna","Kurnool","Nandyal","Nellore","Palnadu","Prakasam","Srikakulam","Tirupati","Visakhapatnam","Vizianagaram","West Godavari"
+],
+
+"Telangana":[
+"Adilabad","Bhadradri Kothagudem","Hyderabad","Jagtial","Jangaon","Jayashankar Bhupalpally","Jogulamba Gadwal","Kamareddy","Karimnagar","Khammam","Komaram Bheem","Mahabubabad","Mahbubnagar","Mancherial","Medak","Medchal-Malkajgiri","Mulugu","Nagarkurnool","Nalgonda","Nirmal","Nizamabad","Peddapalli","Rajanna Sircilla","Rangareddy","Sangareddy","Siddipet","Suryapet","Vikarabad","Wanaparthy","Warangal","Yadadri Bhuvanagiri"
+],
+
+"Arunachal Pradesh":["Tawang","Papum Pare","Lohit","Changlang","Tirap","Anjaw","West Kameng","East Siang","Upper Siang"],
+"Assam":["Baksa","Barpeta","Bongaigaon","Cachar","Darrang","Dhemaji","Dhubri","Dibrugarh","Goalpara","Golaghat","Hailakandi","Jorhat","Kamrup","Karimganj","Kokrajhar","Lakhimpur","Morigaon","Nagaon","Nalbari","Sonitpur","Tinsukia"],
+"Bihar":["Araria","Aurangabad","Begusarai","Bhagalpur","Bhojpur","Buxar","Darbhanga","Gaya","Katihar","Kishanganj","Madhepura","Madhubani","Muzaffarpur","Nalanda","Patna","Purnia","Rohtas","Samastipur","Saran","Sitamarhi","Siwan","Vaishali"],
+"Chhattisgarh":["Balod","Bastar","Bilaspur","Dantewada","Dhamtari","Durg","Jashpur","Korba","Raigarh","Raipur","Rajnandgaon","Sukma","Surguja"],
+"Goa":["North Goa","South Goa"],
+"Gujarat":["Ahmedabad","Amreli","Anand","Banaskantha","Bharuch","Bhavnagar","Gandhinagar","Jamnagar","Junagadh","Kheda","Kutch","Mehsana","Morbi","Navsari","Patan","Porbandar","Rajkot","Sabarkantha","Surat","Vadodara","Valsad"],
+"Haryana":["Ambala","Bhiwani","Faridabad","Fatehabad","Gurugram","Hisar","Jhajjar","Jind","Kaithal","Karnal","Kurukshetra","Mahendragarh","Palwal","Panchkula","Panipat","Rewari","Rohtak","Sirsa","Sonipat","Yamunanagar"],
+"Himachal Pradesh":["Bilaspur","Chamba","Hamirpur","Kangra","Kinnaur","Kullu","Lahaul and Spiti","Mandi","Shimla","Sirmaur","Solan","Una"],
+"Jharkhand":["Bokaro","Chatra","Deoghar","Dhanbad","Dumka","East Singhbhum","Garhwa","Giridih","Godda","Gumla","Hazaribagh","Khunti","Koderma","Latehar","Lohardaga","Pakur","Palamu","Ramgarh","Ranchi","Sahebganj","Simdega","West Singhbhum"],
+"Madhya Pradesh":["Bhopal","Indore","Jabalpur","Gwalior","Sagar","Ujjain","Rewa","Ratlam","Sehore","Shivpuri","Satna","Vidisha","Neemuch","Katni","Hoshangabad","Dewas","Burhanpur"],
+"Maharashtra":["Ahmednagar","Akola","Amravati","Aurangabad","Beed","Bhandara","Buldhana","Chandrapur","Dhule","Gadchiroli","Gondia","Hingoli","Jalgaon","Jalna","Kolhapur","Latur","Mumbai City","Mumbai Suburban","Nagpur","Nanded","Nashik","Palghar","Parbhani","Pune","Raigad","Ratnagiri","Sangli","Satara","Sindhudurg","Solapur","Thane","Wardha","Washim","Yavatmal"],
+"Manipur":["Bishnupur","Chandel","Churachandpur","Imphal East","Imphal West","Jiribam","Kakching","Kamjong","Kangpokpi","Senapati","Tamenglong","Thoubal","Ukhrul"],
+"Meghalaya":["East Khasi Hills","West Khasi Hills","Ri Bhoi","East Garo Hills","West Garo Hills","South Garo Hills","Jaintia Hills"],
+"Mizoram":["Aizawl","Champhai","Kolasib","Lawngtlai","Lunglei","Mamit","Saiha","Serchhip"],
+"Nagaland":["Dimapur","Kohima","Mokokchung","Mon","Peren","Phek","Tuensang","Wokha","Zunheboto"],
+"Odisha":["Angul","Balangir","Balasore","Bargarh","Bhadrak","Cuttack","Dhenkanal","Gajapati","Ganjam","Jagatsinghpur","Jajpur","Jharsuguda","Kalahandi","Kandhamal","Kendrapara","Khordha","Koraput","Malkangiri","Mayurbhanj","Nayagarh","Puri","Rayagada","Sambalpur","Sundargarh"],
+"Punjab":["Amritsar","Barnala","Bathinda","Faridkot","Ferozepur","Gurdaspur","Hoshiarpur","Jalandhar","Kapurthala","Ludhiana","Mansa","Moga","Pathankot","Patiala","Rupnagar","Sangrur","Tarn Taran"],
+"Rajasthan":["Ajmer","Alwar","Banswara","Baran","Barmer","Bharatpur","Bhilwara","Bikaner","Bundi","Chittorgarh","Churu","Dausa","Dungarpur","Hanumangarh","Jaipur","Jaisalmer","Jalore","Jhunjhunu","Jodhpur","Karauli","Kota","Nagaur","Pali","Rajsamand","Sawai Madhopur","Sikar","Sirohi","Sri Ganganagar","Tonk","Udaipur"],
+"Sikkim":["Gangtok","Gyalshing","Mangan","Namchi","Pakyong","Soreng"],
+"Tripura":["Dhalai","Gomati","Khowai","North Tripura","Sepahijala","South Tripura","Unakoti","West Tripura"],
+"Uttar Pradesh":["Agra","Aligarh","Allahabad","Ayodhya","Bareilly","Bulandshahr","Etawah","Firozabad","Ghaziabad","Gorakhpur","Jhansi","Kanpur Nagar","Lucknow","Mathura","Meerut","Moradabad","Muzaffarnagar","Noida","Pratapgarh","Raebareli","Saharanpur","Sitapur","Unnao","Varanasi"],
+"Uttarakhand":["Almora","Bageshwar","Chamoli","Champawat","Dehradun","Haridwar","Nainital","Pauri Garhwal","Pithoragarh","Rudraprayag","Tehri Garhwal","Udham Singh Nagar","Uttarkashi"],
+"West Bengal":["Alipurduar","Bankura","Birbhum","Cooch Behar","Darjeeling","Hooghly","Howrah","Jalpaiguri","Kalimpong","Kolkata","Malda","Murshidabad","Nadia","North 24 Parganas","South 24 Parganas","Purba Medinipur","Paschim Medinipur"]
+};
+
+function loadDistricts(){
+
+    const state=document.getElementById("state").value;
+    const district=document.getElementById("district");
+
+    district.innerHTML="<option value=''>Select District</option>";
+
+    if(districts[state]){
+        districts[state].forEach(function(item){
+            let option=document.createElement("option");
+            option.value=item;
+            option.text=item;
+            district.appendChild(option);
+        });
+    }
+}
+</script>
+
+<script>
+function togglePassword(inputId, icon){
+
+    const input = document.getElementById(inputId);
+
+    if(input.type === "password"){
+        input.type = "text";
+        icon.textContent = "🙈";
+    }else{
+        input.type = "password";
+        icon.textContent = "👁️";
+    }
+
+}
+// Caps Lock Warning
+function addCapsWarning(inputId, warningId){
+
+    const input = document.getElementById(inputId);
+    const warning = document.getElementById(warningId);
+
+    input.addEventListener("keyup", function(event){
+
+        if(event.getModifierState("CapsLock")){
+            warning.style.display = "block";
+        }else{
+            warning.style.display = "none";
+        }
+
+    });
+
+}
+
+addCapsWarning("password","caps-warning-password");
+addCapsWarning("confirm_password","caps-warning-confirm");
+</script>
+
+</body>
+</html>

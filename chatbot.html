@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>AI Chatbot</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+
+<div class="login-container">
+
+    <h1>AI Chatbot</h1>
+
+    <p>Ask your government-related questions</p>
+
+    <form method="POST">
+
+        <input
+            type="text"
+            name="question"
+            placeholder="Ask your question..."
+            required>
+
+        <button type="submit">
+            Ask
+        </button>
+
+    </form>
+
+    {% if answer %}
+
+    <br>
+
+    <div style="background:#eef5ff;padding:15px;border-radius:10px;">
+
+        <b>Answer:</b>
+
+        <p>{{ answer }}</p>
+
+    </div>
+
+    {% endif %}
+
+    <br>
+
+    <a href="/dashboard">
+        <button>Back to Dashboard</button>
+    </a>
+
+</div>
+
+</body>
+
+</html>

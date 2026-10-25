@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Passport Assistant</title>
+
+    <style>
+        *{
+            box-sizing:border-box;
+        }
+
+        body{
+            margin:0;
+            font-family:Arial,sans-serif;
+            background:#f4f8ff;
+            color:#1e293b;
+        }
+
+        .container{
+            width:92%;
+            max-width:1100px;
+            margin:30px auto;
+        }
+
+        .hero{
+            background:linear-gradient(135deg,#2563eb,#4f46e5);
+            color:white;
+            padding:30px;
+            border-radius:20px;
+            margin-bottom:25px;
+        }
+
+        .hero h1{
+            margin:0 0 10px;
+            font-size:32px;
+        }
+
+        .hero p{
+            margin:0;
+            line-height:1.5;
+        }
+
+        .info-card{
+            background:white;
+            padding:25px;
+            border-radius:18px;
+            margin-bottom:20px;
+            box-shadow:0 8px 20px rgba(0,0,0,.08);
+        }
+
+        .info-card h2{
+            color:#1d4ed8;
+            margin-top:0;
+        }
+
+        .passport-card{
+            background:#f8fbff;
+            border-left:6px solid #2563eb;
+            padding:20px;
+            border-radius:15px;
+            margin-top:18px;
+        }
+
+        .passport-card h3{
+            color:#1d4ed8;
+            margin-top:0;
+        }
+
+        .passport-card p{
+            line-height:1.6;
+            color:#475569;
+        }
+
+        .apply-btn{
+            display:inline-block;
+            margin-top:10px;
+            padding:11px 18px;
+            background:#2563eb;
+            color:white;
+            text-decoration:none;
+            border-radius:9px;
+            font-weight:bold;
+        }
+
+        .apply-btn:hover{
+            background:#1d4ed8;
+        }
+
+        ul,ol{
+            line-height:1.8;
+        }
+    </style>
+</head>
+
+<body>
+
+{% include "navbar.html" %}
+
+<div class="container">
+
+    <div class="hero">
+
+        <h1>🛂 Passport Assistant</h1>
+
+        <p>
+            Get passport application guidance,
+            required documents, application steps
+            and the official passport portal.
+        </p>
+
+    </div>
+
+
+    <div class="info-card">
+
+        <h2>🛂 Passport Services</h2>
+
+
+        <div class="passport-card">
+
+            <h3>🆕 New Passport</h3>
+
+            <p>
+                Apply online for a new passport through
+                the official Passport Seva portal.
+            </p>
+
+            <a href="https://www.passportindia.gov.in/"
+               target="_blank"
+               class="apply-btn">
+                🚀 Apply Now
+            </a>
+
+        </div>
+
+
+        <div class="passport-card">
+
+            <h3>🔄 Passport Renewal / Re-issue</h3>
+
+            <p>
+                Use the official portal for passport
+                re-issue, renewal and other passport services.
+            </p>
+
+            <a href="https://www.passportindia.gov.in/"
+               target="_blank"
+               class="apply-btn">
+                🌐 Visit Passport Seva
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="info-card">
+
+        <h2>📄 Commonly Required Documents</h2>
+
+        <ul>
+            <li>Proof of Identity</li>
+            <li>Proof of Address</li>
+            <li>Date of Birth Proof</li>
+            <li>Aadhaar Card, where applicable</li>
+            <li>Recent Passport-size Photograph, where applicable</li>
+            <li>Existing Passport for re-issue, if applicable</li>
+        </ul>
+
+    </div>
+
+
+    <div class="info-card">
+
+        <h2>📌 Basic Application Process</h2>
+
+        <ol>
+            <li>Register or log in to the Passport Seva portal.</li>
+            <li>Choose the required passport service.</li>
+            <li>Fill in the application details.</li>
+            <li>Pay the applicable fee and schedule an appointment.</li>
+            <li>Visit the Passport Seva Kendra with required documents.</li>
+            <li>Complete verification and track your application.</li>
+        </ol>
+
+    </div>
+
+</div>
+
+</body>
+</html>

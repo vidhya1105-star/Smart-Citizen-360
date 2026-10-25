@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Government Schemes</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+
+        .schemes-page {
+            width: 92%;
+            max-width: 1200px;
+            margin: 35px auto;
+        }
+
+        .schemes-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .schemes-header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .schemes-header p {
+            color: #666;
+            font-size: 15px;
+        }
+
+        .schemes-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+
+        .scheme-card {
+            background: white;
+            border: 1px solid #e1e5ea;
+            border-radius: 14px;
+            padding: 24px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+        }
+
+        .scheme-title {
+            font-size: 21px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .scheme-description {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 18px;
+        }
+
+        .scheme-info {
+            background: #f7f9fc;
+            border-radius: 10px;
+            padding: 14px;
+            margin-bottom: 15px;
+        }
+
+        .scheme-info p {
+            margin: 7px 0;
+            font-size: 14px;
+        }
+
+        .label {
+            font-weight: bold;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        .available {
+            background: #e8f7ed;
+            color: #188038;
+        }
+
+        .expired {
+            background: #fde8e8;
+            color: #d93025;
+        }
+
+        .missing {
+            background: #fff4df;
+            color: #b56a00;
+        }
+
+        .scheme-button {
+            display: inline-block;
+            padding: 10px 18px;
+            background: #1769c2;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+
+        .scheme-button:hover {
+            opacity: 0.9;
+        }
+
+        @media (max-width: 750px) {
+
+            .schemes-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+{% include 'navbar.html' %}
+
+
+<div class="schemes-page">
+
+    <div class="schemes-header">
+
+        <h1>Government Schemes</h1>
+
+        <p>
+            Explore government welfare schemes and
+            check document availability.
+        </p>
+
+    </div>
+
+
+    <div class="schemes-grid">
+
+
+        {% for scheme_name, requirements in schemes.items() %}
+
+        <div class="scheme-card">
+
+            <div class="scheme-title">
+                {{ scheme_name }}
+            </div>
+
+            <div class="scheme-description">
+
+                Government welfare scheme available
+                for eligible citizens.
+
+            </div>
+
+
+            <div class="scheme-info">
+
+                {% for item in requirements %}
+
+                <p>
+
+                    <span class="label">
+                        Required Document:
+                    </span>
+
+                    {{ item.document }}
+
+                </p>
+
+                {% endfor %}
+
+            </div>
+
+
+            {% for item in requirements %}
+
+               {% if item.status == "Available & Valid" %}
+
+                    <span class="status available">
+                        🟢 Document Available & Valid
+                    </span>
+
+                {% elif item.status == "Expired" %}
+
+                    <span class="status expired">
+                        🔴 Document Expired
+                    </span>
+
+                {% else %}
+
+                    <span class="status missing">
+                        🟠 Required Document Missing
+                    </span>
+
+                {% endif %}
+
+            {% endfor %}
+
+
+            {% if scheme_name == "PM Kisan" %}
+
+                <br>
+
+                <a href="https://pmkisan.gov.in/"
+                   target="_blank"
+                   class="scheme-button">
+
+                    Official Website
+
+                </a>
+
+            {% elif scheme_name == "Ayushman Bharat" %}
+
+                <br>
+
+                <a href="https://pmjay.gov.in/"
+                   target="_blank"
+                   class="scheme-button">
+
+                    Official Website
+
+                </a>
+
+            {% elif scheme_name == "PM Awas Yojana" %}
+
+                <br>
+
+                <a href="https://pmaymis.gov.in/"
+                   target="_blank"
+                   class="scheme-button">
+
+                    Official Website
+
+                </a>
+
+            {% elif scheme_name == "Ujjwala Yojana" %}
+
+                <br>
+
+                <a href="https://www.pmuy.gov.in/"
+                   target="_blank"
+                   class="scheme-button">
+
+                    Official Website
+
+                </a>
+
+            {% elif scheme_name == "National Scholarship" %}
+
+                <br>
+
+                <a href="https://scholarships.gov.in/"
+                   target="_blank"
+                   class="scheme-button">
+
+                    Official Website
+
+                </a>
+
+            {% endif %}
+
+        </div>
+
+        {% endfor %}
+
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

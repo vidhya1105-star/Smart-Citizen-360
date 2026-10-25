@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Citizen Profile</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        .profile-container {
+            max-width: 950px;
+            margin: 35px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,.12);
+        }
+
+        .profile-title {
+            text-align: center;
+            color: #1d4ed8;
+            margin-bottom: 25px;
+        }
+
+        /* PROFILE PHOTO */
+        .profile-photo-section {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .profile-photo,
+        .profile-placeholder {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: block;
+            margin: 0 auto 15px;
+        }
+
+        .profile-photo {
+            object-fit: cover;
+            border: 4px solid #2563eb;
+        }
+
+        .profile-placeholder {
+            background: #EEF2FF;
+            border: 4px solid #2563eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 45px;
+        }
+
+        .photo-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .photo-btn {
+            padding: 11px 18px;
+            border: none;
+            border-radius: 10px;
+            background: #2563eb;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .photo-btn.gallery {
+            background: #4f46e5;
+        }
+
+        .photo-btn:hover {
+            opacity: .9;
+        }
+
+        .photo-note {
+            font-size: 12px;
+            color: #64748B;
+            margin-top: 10px;
+        }
+
+        /* Hide actual file inputs */
+        .hidden-file-input {
+            display: none;
+        }
+
+        /* FORM */
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #334155;
+        }
+
+        .input-group input,
+        .input-group select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
+            font-size: 15px;
+            background: #f8fafc;
+            box-sizing: border-box;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus {
+            border-color: #2563eb;
+            outline: none;
+            background: white;
+            box-shadow: 0 0 8px rgba(37,99,235,.2);
+        }
+
+        .full-width {
+            grid-column: 1 / 3;
+        }
+
+        .save-btn {
+            width: 100%;
+            margin-top: 25px;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(90deg,#2563eb,#4f46e5);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .save-btn:hover {
+            opacity: .95;
+        }
+
+        @media(max-width:768px) {
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: 1 / 2;
+            }
+
+            .profile-container {
+                margin: 20px 10px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+{% include 'navbar.html' %}
+
+<div class="profile-container">
+
+    <div class="profile-title">
+        <h2>👤 Citizen Profile</h2>
+        <p>
+            Complete your profile to get personalized government schemes.
+        </p>
+    </div>
+
+    <form method="POST" enctype="multipart/form-data">
+
+        <!-- ================= PROFILE PHOTO ================= -->
+<div class="profile-photo-section">
+
+    <div class="profile-photo-section">
+
+    {% if user.profile_photo %}
+
+        <img src="{{ url_for('static', filename='profile_pics/' + user.profile_photo) }}"
+             id="profilePreview"
+             class="profile-photo">
+
+    {% else %}
+
+        <div id="profilePlaceholder" class="profile-placeholder">
+            {{ (user.email[0] if user.email else user.fullname[0]) | upper }}
+        </div>
+
+        <img id="profilePreview"
+             class="profile-photo"
+             style="display:none;">
+
+    {% endif %}
+
+    <div class="photo-buttons">
+
+        <button type="button"
+        class="photo-btn"
+        onclick="openCamera()">
+    📷 Camera
+</button>
+
+        <button type="button"
+                class="photo-btn gallery"
+                onclick="document.getElementById('galleryInput').click()">
+            🖼️ Add from Gallery
+        </button>
+
+    </div>
+
+    <input type="file"
+           id="cameraInput"
+           name="profile_photo"
+           accept="image/*"
+           capture="environment"
+           class="hidden-file-input">
+
+    <input type="file"
+           id="galleryInput"
+           accept="image/*"
+           class="hidden-file-input">
+
+    <p class="photo-note">
+        Camera or Gallery • JPG / JPEG / PNG (Max 5MB)
+    </p>
+
+</div>
+
+    
+</div>
+<!-- ================================================ -->
+
+
+        <!-- ================= PROFILE DETAILS ================= -->
+
+        <div class="profile-grid">
+
+            <!-- FULL NAME -->
+            <div class="input-group">
+                <label>Full Name</label>
+
+                <input type="text"
+                       name="fullname"
+                       value="{{ user.fullname if user else '' }}"
+                       required>
+            </div>
+
+
+            <!-- DATE OF BIRTH -->
+            <div class="input-group">
+                <label>Date of Birth</label>
+
+                <input type="date"
+                       name="dob"
+                       value="{{ user.dob if user else '' }}">
+            </div>
+
+
+            <!-- GENDER -->
+            <div class="input-group">
+                <label>Gender</label>
+
+                <select name="gender">
+
+                    <option value="">Select Gender</option>
+
+                    <option value="Male"
+                        {% if user and user.gender == "Male" %}selected{% endif %}>
+                        Male
+                    </option>
+
+                    <option value="Female"
+                        {% if user and user.gender == "Female" %}selected{% endif %}>
+                        Female
+                    </option>
+
+                    <option value="Other"
+                        {% if user and user.gender == "Other" %}selected{% endif %}>
+                        Other
+                    </option>
+
+                </select>
+            </div>
+
+
+            <!-- EDUCATION -->
+            <div class="input-group">
+                <label>Education</label>
+
+                <select name="education">
+
+                    <option value="">Select Education</option>
+
+                    <option value="10th"
+                        {% if user and user.education == "10th" %}selected{% endif %}>
+                        10th
+                    </option>
+
+                    <option value="12th"
+                        {% if user and user.education == "12th" %}selected{% endif %}>
+                        12th
+                    </option>
+
+                    <option value="Diploma"
+                        {% if user and user.education == "Diploma" %}selected{% endif %}>
+                        Diploma
+                    </option>
+
+                    <option value="ITI"
+                        {% if user and user.education == "ITI" %}selected{% endif %}>
+                        ITI
+                    </option>
+
+                    <option value="UG Student"
+                        {% if user and user.education == "UG Student" %}selected{% endif %}>
+                        UG Student
+                    </option>
+
+                    <option value="BCA"
+                        {% if user and user.education == "BCA" %}selected{% endif %}>
+                        BCA
+                    </option>
+
+                    <option value="B.Sc"
+                        {% if user and user.education == "B.Sc" %}selected{% endif %}>
+                        B.Sc
+                    </option>
+
+                    <option value="B.Com"
+                        {% if user and user.education == "B.Com" %}selected{% endif %}>
+                        B.Com
+                    </option>
+
+                    <option value="B.E / B.Tech"
+                        {% if user and user.education == "B.E / B.Tech" %}selected{% endif %}>
+                        B.E / B.Tech
+                    </option>
+
+                    <option value="BA"
+                        {% if user and user.education == "BA" %}selected{% endif %}>
+                        BA
+                    </option>
+
+                    <option value="MCA"
+                        {% if user and user.education == "MCA" %}selected{% endif %}>
+                        MCA
+                    </option>
+
+                    <option value="MBA"
+                        {% if user and user.education == "MBA" %}selected{% endif %}>
+                        MBA
+                    </option>
+
+                    <option value="M.Sc"
+                        {% if user and user.education == "M.Sc" %}selected{% endif %}>
+                        M.Sc
+                    </option>
+
+                    <option value="M.Com"
+                        {% if user and user.education == "M.Com" %}selected{% endif %}>
+                        M.Com
+                    </option>
+
+                    <option value="Post Graduate"
+                        {% if user and user.education == "Post Graduate" %}selected{% endif %}>
+                        Post Graduate
+                    </option>
+
+                    <option value="PhD"
+                        {% if user and user.education == "PhD" %}selected{% endif %}>
+                        PhD
+                    </option>
+
+                </select>
+            </div>
+
+
+            <!-- OCCUPATION -->
+            <div class="input-group">
+                <label>Occupation</label>
+
+                <select name="occupation">
+
+                    <option value="">Select Occupation</option>
+
+                    <option value="Student"
+                        {% if user and user.occupation == "Student" %}selected{% endif %}>
+                        Student
+                    </option>
+
+                    <option value="Government Employee"
+                        {% if user and user.occupation == "Government Employee" %}selected{% endif %}>
+                        Government Employee
+                    </option>
+
+                    <option value="Private Employee"
+                        {% if user and user.occupation == "Private Employee" %}selected{% endif %}>
+                        Private Employee
+                    </option>
+
+                    <option value="Self Employed"
+                        {% if user and user.occupation == "Self Employed" %}selected{% endif %}>
+                        Self Employed
+                    </option>
+
+                    <option value="Farmer"
+                        {% if user and user.occupation == "Farmer" %}selected{% endif %}>
+                        Farmer
+                    </option>
+
+                    <option value="Business"
+                        {% if user and user.occupation == "Business" %}selected{% endif %}>
+                        Business
+                    </option>
+
+                    <option value="Daily Wage Worker"
+                        {% if user and user.occupation == "Daily Wage Worker" %}selected{% endif %}>
+                        Daily Wage Worker
+                    </option>
+
+                    <option value="Homemaker"
+                        {% if user and user.occupation == "Homemaker" %}selected{% endif %}>
+                        Homemaker
+                    </option>
+
+                    <option value="Unemployed"
+                        {% if user and user.occupation == "Unemployed" %}selected{% endif %}>
+                        Unemployed
+                    </option>
+
+                    <option value="Retired"
+                        {% if user and user.occupation == "Retired" %}selected{% endif %}>
+                        Retired
+                    </option>
+
+                    <option value="Other"
+                        {% if user and user.occupation == "Other" %}selected{% endif %}>
+                        Other
+                    </option>
+
+                </select>
+            </div>
+
+
+            <!-- INCOME -->
+            <div class="input-group">
+                <label>Annual Family Income</label>
+
+                <select name="income">
+
+                    <option value="">Select Income Range</option>
+
+                    <option value="Below 50000"
+                        {% if user and user.income == "Below 50000" %}selected{% endif %}>
+                        Below ₹50,000
+                    </option>
+
+                    <option value="50000-100000"
+                        {% if user and user.income == "50000-100000" %}selected{% endif %}>
+                        ₹50,000 - ₹1,00,000
+                    </option>
+
+                    <option value="100000-300000"
+                        {% if user and user.income == "100000-300000" %}selected{% endif %}>
+                        ₹1,00,000 - ₹3,00,000
+                    </option>
+
+                    <option value="300000-500000"
+                        {% if user and user.income == "300000-500000" %}selected{% endif %}>
+                        ₹3,00,000 - ₹5,00,000
+                    </option>
+
+                    <option value="500000-800000"
+                        {% if user and user.income == "500000-800000" %}selected{% endif %}>
+                        ₹5,00,000 - ₹8,00,000
+                    </option>
+
+                    <option value="800000-1000000"
+                        {% if user and user.income == "800000-1000000" %}selected{% endif %}>
+                        ₹8,00,000 - ₹10,00,000
+                    </option>
+
+                    <option value="Above 1000000"
+                        {% if user and user.income == "Above 1000000" %}selected{% endif %}>
+                        Above ₹10,00,000
+                    </option>
+
+                </select>
+            </div>
+
+
+            <!-- STATE -->
+            <div class="input-group">
+
+                <label>State</label>
+
+                <select name="state"
+                        id="state"
+                        onchange="loadDistricts()">
+
+                    <option value="">Select State</option>
+
+                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+                    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                    <option value="Assam">Assam</option>
+                    <option value="Bihar">Bihar</option>
+                    <option value="Chhattisgarh">Chhattisgarh</option>
+                    <option value="Goa">Goa</option>
+                    <option value="Gujarat">Gujarat</option>
+                    <option value="Haryana">Haryana</option>
+                    <option value="Himachal Pradesh">Himachal Pradesh</option>
+                    <option value="Jharkhand">Jharkhand</option>
+                    <option value="Karnataka">Karnataka</option>
+                    <option value="Kerala">Kerala</option>
+                    <option value="Madhya Pradesh">Madhya Pradesh</option>
+                    <option value="Maharashtra">Maharashtra</option>
+                    <option value="Manipur">Manipur</option>
+                    <option value="Meghalaya">Meghalaya</option>
+                    <option value="Mizoram">Mizoram</option>
+                    <option value="Nagaland">Nagaland</option>
+                    <option value="Odisha">Odisha</option>
+                    <option value="Punjab">Punjab</option>
+                    <option value="Rajasthan">Rajasthan</option>
+                    <option value="Sikkim">Sikkim</option>
+                    <option value="Tamil Nadu">Tamil Nadu</option>
+                    <option value="Telangana">Telangana</option>
+                    <option value="Tripura">Tripura</option>
+                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                    <option value="Uttarakhand">Uttarakhand</option>
+                    <option value="West Bengal">West Bengal</option>
+
+                </select>
+
+            </div>
+
+
+            <!-- DISTRICT -->
+            <div class="input-group">
+
+                <label>District</label>
+
+                <select name="district" id="district">
+
+                    <option value="">Select District</option>
+
+                </select>
+
+            </div>
+
+
+            <!-- EMAIL -->
+            <div class="input-group full-width">
+
+                <label>Email</label>
+
+                <input type="email"
+                       name="email"
+                       value="{{ user.email if user else '' }}"
+                       readonly
+                       style="cursor: default; background:#f1f5f9;">
+
+            </div>
+
+        </div>
+
+
+        <!-- SAVE -->
+        <button type="submit" class="save-btn">
+            💾 Save Profile
+        </button>
+
+    </form>
+
+</div>
+
+
+<script>
+
+
+/* =========================================================
+   SHOW SELECTED PHOTO
+========================================================= */
+
+function showPhotoPreview(input) {
+
+    if (input.files && input.files[0]) {
+
+        const file = input.files[0];
+
+        // Maximum 5 MB
+        if (file.size > 5 * 1024 * 1024) {
+
+            alert("Profile photo must be less than 5 MB.");
+
+            input.value = "";
+
+            return;
+        }
+
+
+        // Check image
+        if (!file.type.startsWith("image/")) {
+
+            alert("Please select an image file.");
+
+            input.value = "";
+
+            return;
+        }
+
+
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+
+            const preview =
+                document.getElementById("profilePreview");
+
+            const placeholder =
+                document.getElementById("profilePlaceholder");
+
+
+            preview.src = e.target.result;
+
+            preview.style.display = "block";
+
+
+            if (placeholder) {
+                placeholder.style.display = "none";
+            }
+
+        };
+
+        reader.readAsDataURL(file);
+    }
+}
+
+
+/* Camera selected */
+document.getElementById("cameraInput")
+    .addEventListener("change", function() {
+
+        /*
+         * Copy camera file to the gallery input.
+         * This allows the selected camera photo
+         * to be submitted with the form.
+         */
+
+        if (this.files.length > 0) {
+
+            try {
+                const dataTransfer = new DataTransfer();
+
+                dataTransfer.items.add(this.files[0]);
+
+                document.getElementById("galleryInput").files =
+                    dataTransfer.files;
+
+            } catch (error) {
+                console.log(error);
+            }
+
+            showPhotoPreview(this);
+        }
+
+    });
+
+
+/* Gallery selected */
+document.getElementById("galleryInput")
+    .addEventListener("change", function() {
+
+        if (this.files.length > 0) {
+
+            /*
+             * Copy gallery file to camera input
+             * so profile_photo is available for form submission.
+             */
+
+            try {
+                const dataTransfer = new DataTransfer();
+
+                dataTransfer.items.add(this.files[0]);
+
+                document.getElementById("cameraInput").files =
+                    dataTransfer.files;
+
+            } catch (error) {
+                console.log(error);
+            }
+
+            showPhotoPreview(this);
+        }
+
+    });
+
+
+/* =========================================================
+   DISTRICTS
+========================================================= */
+
+const districts = {
+
+    "Tamil Nadu": [
+        "Ariyalur","Chengalpattu","Chennai","Coimbatore","Cuddalore",
+        "Dharmapuri","Dindigul","Erode","Kallakurichi","Kancheepuram",
+        "Karur","Krishnagiri","Madurai","Mayiladuthurai","Nagapattinam",
+        "Namakkal","Nilgiris","Perambalur","Pudukkottai","Ramanathapuram",
+        "Ranipet","Salem","Sivaganga","Tenkasi","Thanjavur","Theni",
+        "Thoothukudi","Tiruchirappalli","Tirunelveli","Tirupathur",
+        "Tiruppur","Tiruvallur","Tiruvannamalai","Tiruvarur",
+        "Vellore","Viluppuram","Virudhunagar"
+    ],
+
+    "Kerala": [
+        "Alappuzha","Ernakulam","Idukki","Kannur","Kasaragod",
+        "Kollam","Kottayam","Kozhikode","Malappuram","Palakkad",
+        "Pathanamthitta","Thiruvananthapuram","Thrissur","Wayanad"
+    ],
+
+    "Karnataka": [
+        "Bagalkot","Ballari","Belagavi","Bengaluru Rural",
+        "Bengaluru Urban","Bidar","Chamarajanagar","Chikkaballapur",
+        "Chikkamagaluru","Chitradurga","Dakshina Kannada","Davanagere",
+        "Dharwad","Gadag","Hassan","Haveri","Kalaburagi","Kodagu",
+        "Kolar","Koppal","Mandya","Mysuru","Raichur","Ramanagara",
+        "Shivamogga","Tumakuru","Udupi","Uttara Kannada",
+        "Vijayapura","Yadgir"
+    ],
+
+    "Andhra Pradesh": [
+        "Anakapalli","Anantapur","Bapatla","Chittoor","East Godavari",
+        "Eluru","Guntur","Kakinada","Krishna","Kurnool","Nandyal",
+        "Nellore","Palnadu","Prakasam","Srikakulam","Tirupati",
+        "Visakhapatnam","Vizianagaram","West Godavari"
+    ],
+
+    "Telangana": [
+        "Adilabad","Bhadradri Kothagudem","Hyderabad","Jagtial",
+        "Jangaon","Jayashankar Bhupalpally","Jogulamba Gadwal",
+        "Kamareddy","Karimnagar","Khammam","Komaram Bheem",
+        "Mahabubabad","Mahbubnagar","Mancherial","Medak",
+        "Medchal-Malkajgiri","Mulugu","Nagarkurnool","Nalgonda",
+        "Nirmal","Nizamabad","Peddapalli","Rajanna Sircilla",
+        "Rangareddy","Sangareddy","Siddipet","Suryapet","Vikarabad",
+        "Wanaparthy","Warangal","Yadadri Bhuvanagiri"
+    ],
+
+    "Arunachal Pradesh": [
+        "Tawang","West Kameng","East Kameng","Papum Pare",
+        "Kurung Kumey","Kra Daadi","Lower Subansiri",
+        "Upper Subansiri","West Siang","Shi Yomi","East Siang",
+        "Siang","Upper Siang","Lower Siang","Lower Dibang Valley",
+        "Dibang Valley","Lohit","Anjaw","Namsai","Changlang",
+        "Tirap","Longding"
+    ],
+
+    "Assam": [
+        "Baksa","Bajali","Barpeta","Biswanath","Bongaigaon",
+        "Cachar","Charaideo","Chirang","Darrang","Dhemaji","Dhubri",
+        "Dibrugarh","Dima Hasao","Goalpara","Golaghat","Hailakandi",
+        "Hojai","Jorhat","Kamrup","Kamrup Metropolitan","Karbi Anglong",
+        "Karimganj","Kokrajhar","Lakhimpur","Majuli","Morigaon",
+        "Nagaon","Nalbari","Sivasagar","Sonitpur",
+        "South Salmara-Mankachar","Tinsukia","Udalguri"
+    ],
+
+    "Bihar": [
+        "Araria","Arwal","Aurangabad","Banka","Begusarai","Bhagalpur",
+        "Bhojpur","Buxar","Darbhanga","East Champaran","Gaya",
+        "Gopalganj","Jamui","Jehanabad","Kaimur","Katihar","Khagaria",
+        "Kishanganj","Lakhisarai","Madhepura","Madhubani","Munger",
+        "Muzaffarpur","Nalanda","Nawada","Patna","Purnia","Rohtas",
+        "Saharsa","Samastipur","Saran","Sheikhpura","Sheohar",
+        "Sitamarhi","Siwan","Supaul","Vaishali","West Champaran"
+    ],
+
+    "Chhattisgarh": [
+        "Balod","Baloda Bazar","Balrampur","Bastar","Bemetara",
+        "Bijapur","Bilaspur","Dantewada","Dhamtari","Durg",
+        "Gariaband","Gaurela-Pendra-Marwahi","Janjgir-Champa",
+        "Jashpur","Kabirdham","Kanker","Kondagaon","Korba","Koriya",
+        "Mahasamund","Mungeli","Narayanpur","Raigarh","Raipur",
+        "Rajnandgaon","Sukma","Surajpur","Surguja"
+    ],
+
+    "Goa": [
+        "North Goa","South Goa"
+    ],
+
+    "Gujarat": [
+        "Ahmedabad","Amreli","Anand","Aravalli","Banaskantha","Bharuch",
+        "Bhavnagar","Botad","Chhota Udaipur","Dahod","Dang",
+        "Devbhoomi Dwarka","Gandhinagar","Gir Somnath","Jamnagar",
+        "Junagadh","Kheda","Kutch","Mahisagar","Mehsana","Morbi",
+        "Narmada","Navsari","Panchmahal","Patan","Porbandar","Rajkot",
+        "Sabarkantha","Surat","Surendranagar","Tapi","Vadodara","Valsad"
+    ],
+
+    "Haryana": [
+        "Ambala","Bhiwani","Charkhi Dadri","Faridabad","Fatehabad",
+        "Gurugram","Hisar","Jhajjar","Jind","Kaithal","Karnal",
+        "Kurukshetra","Mahendragarh","Nuh","Palwal","Panchkula",
+        "Panipat","Rewari","Rohtak","Sirsa","Sonipat","Yamunanagar"
+    ],
+
+    "Himachal Pradesh": [
+        "Bilaspur","Chamba","Hamirpur","Kangra","Kinnaur","Kullu",
+        "Lahaul and Spiti","Mandi","Shimla","Sirmaur","Solan","Una"
+    ],
+
+    "Jharkhand": [
+        "Bokaro","Chatra","Deoghar","Dhanbad","Dumka",
+        "East Singhbhum","Garhwa","Giridih","Godda","Gumla",
+        "Hazaribagh","Jamtara","Khunti","Koderma","Latehar",
+        "Lohardaga","Pakur","Palamu","Ramgarh","Ranchi","Sahebganj",
+        "Seraikela Kharsawan","Simdega","West Singhbhum"
+    ],
+
+    "Madhya Pradesh": [
+        "Agar Malwa","Alirajpur","Anuppur","Ashoknagar","Balaghat",
+        "Barwani","Betul","Bhind","Bhopal","Burhanpur","Chhatarpur",
+        "Chhindwara","Damoh","Datia","Dewas","Dhar","Dindori","Guna",
+        "Gwalior","Harda","Hoshangabad","Indore","Jabalpur","Jhabua",
+        "Katni","Khandwa","Khargone","Mandla","Mandsaur","Morena",
+        "Narsinghpur","Neemuch","Panna","Raisen","Rajgarh","Ratlam",
+        "Rewa","Sagar","Satna","Sehore","Seoni","Shahdol","Shajapur",
+        "Sheopur","Shivpuri","Sidhi","Singrauli","Tikamgarh","Ujjain",
+        "Umaria","Vidisha"
+    ],
+
+    "Maharashtra": [
+        "Ahmednagar","Akola","Amravati","Aurangabad","Beed","Bhandara",
+        "Buldhana","Chandrapur","Dhule","Gadchiroli","Gondia","Hingoli",
+        "Jalgaon","Jalna","Kolhapur","Latur","Mumbai City",
+        "Mumbai Suburban","Nagpur","Nanded","Nandurbar","Nashik",
+        "Osmanabad","Palghar","Parbhani","Pune","Raigad","Ratnagiri",
+        "Sangli","Satara","Sindhudurg","Solapur","Thane","Wardha",
+        "Washim","Yavatmal"
+    ],
+
+    "Manipur": [
+        "Bishnupur","Chandel","Churachandpur","Imphal East",
+        "Imphal West","Jiribam","Kakching","Kamjong","Kangpokpi",
+        "Noney","Pherzawl","Senapati","Tamenglong","Tengnoupal",
+        "Thoubal","Ukhrul"
+    ],
+
+    "Meghalaya": [
+        "East Garo Hills","East Jaintia Hills","East Khasi Hills",
+        "North Garo Hills","Ri-Bhoi","South Garo Hills",
+        "South West Garo Hills","South West Khasi Hills",
+        "West Garo Hills","West Jaintia Hills","West Khasi Hills"
+    ],
+
+    "Mizoram": [
+        "Aizawl","Champhai","Hnahthial","Khawzawl","Kolasib",
+        "Lawngtlai","Lunglei","Mamit","Saiha","Saitual","Serchhip"
+    ],
+
+    "Nagaland": [
+        "Chumoukedima","Dimapur","Kiphire","Kohima","Longleng",
+        "Mokokchung","Mon","Niuland","Noklak","Peren","Phek",
+        "Shamator","Tseminyu","Tuensang","Wokha","Zunheboto"
+    ],
+
+    "Odisha": [
+        "Angul","Balangir","Balasore","Bargarh","Bhadrak","Boudh",
+        "Cuttack","Deogarh","Dhenkanal","Gajapati","Ganjam",
+        "Jagatsinghpur","Jajpur","Jharsuguda","Kalahandi","Kandhamal",
+        "Kendrapara","Keonjhar","Khordha","Koraput","Malkangiri",
+        "Mayurbhanj","Nabarangpur","Nayagarh","Nuapada","Puri",
+        "Rayagada","Sambalpur","Subarnapur","Sundargarh"
+    ],
+
+    "Punjab": [
+        "Amritsar","Barnala","Bathinda","Faridkot","Fatehgarh Sahib",
+        "Fazilka","Ferozepur","Gurdaspur","Hoshiarpur","Jalandhar",
+        "Kapurthala","Ludhiana","Malerkotla","Mansa","Moga",
+        "Pathankot","Patiala","Rupnagar","Sangrur","SAS Nagar",
+        "Shaheed Bhagat Singh Nagar","Sri Muktsar Sahib","Tarn Taran"
+    ],
+
+    "Rajasthan": [
+        "Ajmer","Alwar","Anupgarh","Balotra","Banswara","Baran",
+        "Barmer","Beawar","Bharatpur","Bhilwara","Bikaner","Bundi",
+        "Chittorgarh","Churu","Dausa","Dholpur","Didwana-Kuchamana",
+        "Dungarpur","Hanumangarh","Jaipur","Jaisalmer","Jalore",
+        "Jhalawar","Jhunjhunu","Jodhpur","Karauli","Khairthal-Tijara",
+        "Kota","Nagaur","Pali","Phalodi","Pratapgarh","Rajsamand",
+        "Salumbar","Sawai Madhopur","Sikar","Sirohi","Sri Ganganagar",
+        "Tonk","Udaipur"
+    ],
+
+    "Sikkim": [
+        "Gangtok","Gyalshing","Mangan","Namchi","Pakyong","Soreng"
+    ],
+
+    "Uttar Pradesh": [
+        "Agra","Aligarh","Ambedkar Nagar","Amethi","Amroha","Auraiya",
+        "Ayodhya","Azamgarh","Baghpat","Bahraich","Ballia","Balrampur",
+        "Banda","Barabanki","Bareilly","Basti","Bhadohi","Bijnor",
+        "Budaun","Bulandshahr","Chandauli","Chitrakoot","Deoria",
+        "Etah","Etawah","Farrukhabad","Fatehpur","Firozabad",
+        "Gautam Buddha Nagar","Ghaziabad","Ghazipur","Gonda",
+        "Gorakhpur","Hamirpur","Hapur","Hardoi","Hathras","Jalaun",
+        "Jaunpur","Jhansi","Kannauj","Kanpur Dehat","Kanpur Nagar",
+        "Kasganj","Kaushambi","Kheri","Kushinagar","Lalitpur","Lucknow",
+        "Maharajganj","Mahoba","Mainpuri","Mathura","Mau","Meerut",
+        "Mirzapur","Moradabad","Muzaffarnagar","Pilibhit","Pratapgarh",
+        "Prayagraj","Raebareli","Rampur","Saharanpur","Sambhal",
+        "Sant Kabir Nagar","Shahjahanpur","Shamli","Shravasti",
+        "Siddharthnagar","Sitapur","Sonbhadra","Sultanpur","Unnao",
+        "Varanasi"
+    ],
+
+    "Uttarakhand": [
+        "Almora","Bageshwar","Chamoli","Champawat","Dehradun","Haridwar",
+        "Nainital","Pauri Garhwal","Pithoragarh","Rudraprayag",
+        "Tehri Garhwal","Udham Singh Nagar","Uttarkashi"
+    ],
+
+    "West Bengal": [
+        "Alipurduar","Bankura","Paschim Bardhaman","Purba Bardhaman",
+        "Birbhum","Cooch Behar","Dakshin Dinajpur","Darjeeling",
+        "Hooghly","Howrah","Jalpaiguri","Jhargram","Kalimpong",
+        "Kolkata","Maldah","Murshidabad","Nadia","North 24 Parganas",
+        "South 24 Parganas","Paschim Medinipur","Purba Medinipur",
+        "Uttar Dinajpur"
+    ]
+
+};
+
+
+/* =========================================================
+   LOAD DISTRICTS
+========================================================= */
+
+function loadDistricts() {
+
+    const state =
+        document.getElementById("state").value;
+
+    const district =
+        document.getElementById("district");
+
+    const savedDistrict =
+        "{{ user.district if user else '' }}";
+
+
+    district.innerHTML =
+        '<option value="">Select District</option>';
+
+
+    if (districts[state]) {
+
+        districts[state].forEach(function(item) {
+
+            const option =
+                document.createElement("option");
+
+            option.value = item;
+
+            option.textContent = item;
+
+
+            if (item === savedDistrict) {
+                option.selected = true;
+            }
+
+
+            district.appendChild(option);
+
+        });
+
+    }
+}
+
+
+/* =========================================================
+   PAGE LOAD
+========================================================= */
+
+window.addEventListener("DOMContentLoaded", function() {
+
+    const state =
+        document.getElementById("state").value;
+
+    if (state) {
+        loadDistricts();
+    }
+
+});
+function openCamera() {
+    document.getElementById("cameraInput").click();
+}
+
+</script>
+
+</body>
+</html>

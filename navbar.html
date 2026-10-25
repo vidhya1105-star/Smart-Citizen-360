@@ -1,0 +1,121 @@
+<nav class="navbar">
+
+    <a href="/dashboard" class="navbar-brand">
+        Smart Citizen 360
+    </a>
+
+    <div class="navbar-links">
+
+        <a href="/profile">Citizen Profile</a>
+
+        <a href="/dashboard">Dashboard</a>
+
+        <a href="/document">Document Locker</a>
+
+        <a href="/mydocuments">My Documents</a>
+
+        <a href="/document-status">Document Status</a>
+
+        <a href="/schemes">Government Schemes</a>
+
+        <a href="/complaint">Help & Support</a>
+
+        <a href="/chatbot">Chatbot</a>
+
+        <a href="/logout" class="nav-logout">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+<style>
+
+.navbar {
+    width: 100%;
+    min-height: 72px;
+    background: linear-gradient(90deg, #1565c0, #1976d2, #2196f3);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 28px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.18);
+}
+
+.navbar-brand {
+    color: white !important;
+    text-decoration: none;
+    font-size: 23px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.navbar-links a {
+    color: white !important;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    transition: 0.3s;
+    white-space: nowrap;
+}
+
+.navbar-links a:hover {
+    color: #ffe082 !important;
+    transform: translateY(-1px);
+}
+
+.navbar-links .nav-logout {
+    background: #e53935;
+    padding: 10px 16px;
+    border-radius: 8px;
+}
+
+.navbar-links .nav-logout:hover {
+    background: #c62828;
+    color: white !important;
+}
+
+@media (max-width: 1100px) {
+
+    .navbar {
+        padding: 12px 18px;
+    }
+
+    .navbar-brand {
+        font-size: 19px;
+    }
+
+    .navbar-links {
+        gap: 10px;
+    }
+
+    .navbar-links a {
+        font-size: 11px;
+    }
+
+}
+
+@media (max-width: 800px) {
+
+    .navbar {
+        flex-direction: column;
+        gap: 12px;
+        padding: 15px;
+    }
+
+    .navbar-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+}
+
+</style>

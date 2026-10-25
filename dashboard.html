@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Citizen 360 - Dashboard</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #eef5ff;
+            color: #1e293b;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            height: 72px;
+            background: linear-gradient(90deg, #1565c0, #1976d2, #2196f3);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 35px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.18);
+        }
+
+        .navbar-brand {
+            color: white;
+            font-size: 24px;
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #ffe082;
+        }
+
+        /* ================= MAIN ================= */
+
+        .dashboard-container {
+            width: 92%;
+            max-width: 1250px;
+            margin: 35px auto 60px;
+        }
+
+        /* ================= WELCOME ================= */
+
+        .welcome-section {
+            background: white;
+            border-radius: 22px;
+            padding: 28px 35px;
+            margin-bottom: 28px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            border-left: 6px solid #1976d2;
+        }
+
+        .welcome-section h1 {
+            margin: 0;
+            color: #1565c0;
+            font-size: 30px;
+        }
+
+        .welcome-section p {
+            margin: 8px 0 0;
+            color: #64748b;
+            font-size: 15px;
+        }
+
+        /* ================= SUMMARY ================= */
+
+        .dashboard-summary {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 22px;
+            margin-bottom: 25px;
+        }
+
+        .summary-card {
+            min-height: 185px;
+            border-radius: 20px;
+            padding: 25px 18px;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.16);
+            transition: 0.3s;
+        }
+
+        .summary-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 16px 30px rgba(0, 0, 0, 0.20);
+        }
+
+        .summary-card::after {
+            content: "";
+            position: absolute;
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.10);
+            right: -35px;
+            top: -35px;
+        }
+
+        .summary-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .summary-card h2 {
+            font-size: 38px;
+            margin: 4px 0;
+            font-weight: 800;
+        }
+
+        .summary-card p {
+            margin: 5px 0;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .blue {
+            background: linear-gradient(135deg, #2196f3, #1565c0);
+        }
+
+        .green {
+            background: linear-gradient(135deg, #43a047, #1b5e20);
+        }
+
+        .red {
+            background: linear-gradient(135deg, #ef5350, #c62828);
+        }
+
+        .orange {
+            background: linear-gradient(135deg, #ff9800, #ef6c00);
+        }
+
+        /* ================= STATUS MESSAGE ================= */
+
+        .success-box {
+            background: #e8f5e9;
+            border-left: 6px solid #2e7d32;
+            color: #1b5e20;
+            padding: 17px 20px;
+            border-radius: 12px;
+            margin-bottom: 32px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .alert-box {
+            background: #ffebee;
+            border-left: 6px solid #d32f2f;
+            color: #b71c1c;
+            padding: 17px 20px;
+            border-radius: 12px;
+            margin-bottom: 32px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        /* ================= QUICK ACCESS ================= */
+
+        .section-title {
+            color: #1565c0;
+            font-size: 23px;
+            margin-bottom: 18px;
+        }
+
+        .dashboard-menu {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .menu-card {
+            background: white;
+            border-radius: 18px;
+            padding: 25px 15px;
+            text-align: center;
+            text-decoration: none;
+            color: #1e293b;
+            box-shadow: 0 7px 20px rgba(0,0,0,0.09);
+            transition: 0.3s;
+            border: 1px solid #e2e8f0;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-6px);
+            border-color: #1976d2;
+            box-shadow: 0 12px 25px rgba(25,118,210,0.20);
+        }
+
+        .menu-icon {
+            width: 58px;
+            height: 58px;
+            margin: 0 auto 12px;
+            border-radius: 15px;
+            background: #e3f2fd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .menu-card span {
+            display: block;
+            font-size: 15px;
+            font-weight: 700;
+            color: #1565c0;
+        }
+
+        /* Different icon backgrounds */
+
+        .menu-card:nth-child(2) .menu-icon {
+            background: #fff3e0;
+        }
+
+        .menu-card:nth-child(3) .menu-icon {
+            background: #e8f5e9;
+        }
+
+        .menu-card:nth-child(4) .menu-icon {
+            background: #fff8e1;
+        }
+
+        .menu-card:nth-child(5) .menu-icon {
+            background: #fce4ec;
+        }
+
+        .menu-card:nth-child(6) .menu-icon {
+            background: #ede7f6;
+        }
+
+        .menu-card:nth-child(7) .menu-icon {
+            background: #e0f7fa;
+        }
+
+        /* ================= LOGOUT ================= */
+
+        .logout-area {
+            text-align: center;
+            margin-top: 35px;
+        }
+
+        .logout-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #ef5350, #c62828);
+            color: white;
+            text-decoration: none;
+            padding: 12px 35px;
+            border-radius: 10px;
+            font-weight: 700;
+            box-shadow: 0 6px 15px rgba(198,40,40,0.25);
+            transition: 0.3s;
+        }
+
+        .logout-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 1000px) {
+
+            .dashboard-summary {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .dashboard-menu {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+        /* ===== Government Readiness Score ===== */
+
+.readiness-card{
+    background:#fff;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    margin:30px 0;
+    text-align:center;
+}
+
+.readiness-card h2{
+    color:#1d4ed8;
+    margin-bottom:8px;
+}
+
+.readiness-card p{
+    color:#64748b;
+    margin-bottom:25px;
+}
+
+.score-circle{
+    --score:0;
+    width:220px;
+    height:220px;
+    margin:20px auto;
+    border-radius:50%;
+
+    background:
+      conic-gradient(
+        #6d28d9 calc(var(--score) * 1%),
+        #e5e7eb 0
+      );
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+}
+
+.score-circle::before{
+    content:"";
+    position:absolute;
+    width:175px;
+    height:175px;
+    background:white;
+    border-radius:50%;
+}
+
+.score-content{
+    position:relative;
+    text-align:center;
+    z-index:1;
+}
+
+.score-content h1{
+    margin:0;
+    font-size:52px;
+    color:#1e3a8a;
+}
+
+.score-content span{
+    font-size:18px;
+    color:#64748b;
+    font-weight:bold;
+}
+
+.readiness-message{
+    margin-top:20px;
+    font-size:16px;
+    font-weight:600;
+}
+
+        @media (max-width: 650px) {
+
+            .navbar {
+                height: auto;
+                padding: 15px;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .navbar a {
+                margin-left: 8px;
+                font-size: 12px;
+            }
+
+            .dashboard-container {
+                width: 94%;
+            }
+
+            .dashboard-summary {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-menu {
+                grid-template-columns: 1fr;
+            }
+
+            .welcome-section h1 {
+                font-size: 24px;
+            }
+
+        }
+    
+.life-event-card {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    padding: 20px;
+    margin-top: 20px;
+
+    background: white;
+    border-radius: 15px;
+
+    text-decoration: none;
+    color: inherit;
+
+    border: 1px solid #e5e7eb;
+
+    transition: 0.2s;
+
+
+.life-event-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.life-event-icon {
+    font-size: 40px;
+}
+
+.life-event-card h3 {
+    margin-bottom: 6px;
+}
+
+.life-event-card p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+}
+}
+
+    </style>
+
+</head>
+
+
+<body>
+
+    {% include 'navbar.html' %}
+
+
+    <div class="dashboard-container">
+
+
+        <!-- WELCOME -->
+
+        <div class="welcome-section">
+
+            <h1>👋 Welcome, {{ username }}</h1>
+
+            <p>
+                Your Smart Citizen 360 digital services dashboard
+            </p>
+
+        </div>
+
+
+        <!-- SUMMARY CARDS -->
+
+        <div class="dashboard-summary">
+
+
+            <div class="summary-card blue">
+
+                <div class="summary-icon">📄</div>
+
+                <h2>{{ total_documents }}</h2>
+
+                <p>Total Documents</p>
+
+            </div>
+
+
+            <div class="summary-card green">
+
+                <div class="summary-icon">✅</div>
+
+                <h2>{{ valid_documents }}</h2>
+
+                <p>Valid Documents</p>
+
+            </div>
+
+
+            <div class="summary-card red">
+
+                <div class="summary-icon">❌</div>
+
+                <h2>{{ expired_documents }}</h2>
+
+                <p>Expired Documents</p>
+
+            </div>
+
+
+            <div class="summary-card orange">
+
+                <div class="summary-icon">🏛️</div>
+
+                <h2>{{ eligible_schemes }}</h2>
+
+                <p>Government Schemes</p>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- DOCUMENT STATUS -->
+
+        {% if expired_documents > 0 %}
+
+        <div class="alert-box">
+
+            ⚠️ <b>{{ expired_documents }}</b>
+            document(s) have expired.
+            Please upload a renewed document.
+
+        </div>
+
+        {% else %}
+
+        <div class="success-box">
+
+            ✅ Great! All your uploaded documents are valid.
+
+        </div>
+
+        {% endif %}
+<!-- GOVERNMENT READINESS SCORE -->
+
+<div class="readiness-card">
+
+    <h2>🏆 Government Readiness Score</h2>
+
+    <p>Your readiness based on your uploaded documents.</p>
+
+    <div class="score-circle"
+         style="--score: {{ readiness_score }};">
+
+        <div class="score-content">
+            <h1>{{ readiness_score }}%</h1>
+            <span>{{ readiness_score }} / 100</span>
+        </div>
+
+    </div>
+
+    <p class="readiness-message">
+
+        {% if readiness_score >= 80 %}
+            🟢 Excellent! You are well prepared for government services.
+
+        {% elif readiness_score >= 50 %}
+            🟡 Good! Upload a few more documents to improve your score.
+
+        {% else %}
+            🔴 Your readiness is low. Please upload the required documents.
+        {% endif %}
+
+    </p>
+
+</div>
+       <!-- QUICK ACCESS -->
+
+        <h2 class="section-title">
+            Quick Access
+        </h2>
+
+
+        <div class="dashboard-menu">
+
+
+            <a href="/profile" class="menu-card">
+
+                <div class="menu-icon">👤</div>
+
+                <span>Citizen Profile</span>
+
+            </a>
+
+
+            <a href="/document" class="menu-card">
+
+                <div class="menu-icon">📂</div>
+
+                <span>Document Locker</span>
+
+            </a>
+
+
+            <a href="/mydocuments" class="menu-card">
+
+                <div class="menu-icon">📄</div>
+
+                <span>My Documents</span>
+
+            </a>
+
+
+            <a href="/document-status" class="menu-card">
+
+                <div class="menu-icon">⏰</div>
+
+                <span>Document Status</span>
+
+            </a>
+
+
+            <a href="/schemes" class="menu-card">
+
+                <div class="menu-icon">🏛️</div>
+
+                <span>Government Schemes</span>
+
+            </a>
+
+
+          <a href="/life-event" class="menu-card">
+
+    <div class="menu-icon">🌱</div>
+
+    <span>Life Event Assistant</span>
+
+</a>
+
+
+
+            <a href="/chatbot" class="menu-card">
+
+                <div class="menu-icon">🤖</div>
+
+                <span>AI Chatbot</span>
+
+            </a>
+
+
+            <a href="/complaint" class="menu-card">
+
+                <div class="menu-icon">💬</div>
+
+                <span>Help & Support</span>
+
+            </a>
+
+
+        </div>
+
+
+
+        <!-- LOGOUT -->
+
+        <div class="logout-area">
+
+            <a href="/logout" class="logout-btn">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>

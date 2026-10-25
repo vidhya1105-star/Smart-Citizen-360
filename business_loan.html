@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Business Loan Assistant</title>
+
+    <style>
+        *{
+            box-sizing:border-box;
+        }
+
+        body{
+            margin:0;
+            font-family:Arial,sans-serif;
+            background:#f4f8ff;
+            color:#1e293b;
+        }
+
+        .container{
+            width:92%;
+            max-width:1100px;
+            margin:30px auto;
+        }
+
+        .hero{
+            background:linear-gradient(135deg,#2563eb,#4f46e5);
+            color:white;
+            padding:30px;
+            border-radius:20px;
+            margin-bottom:25px;
+        }
+
+        .hero h1{
+            margin:0 0 10px;
+            font-size:32px;
+        }
+
+        .hero p{
+            margin:0;
+            line-height:1.5;
+        }
+
+        .info-card{
+            background:white;
+            padding:25px;
+            border-radius:18px;
+            margin-bottom:20px;
+            box-shadow:0 8px 20px rgba(0,0,0,.08);
+        }
+
+        .info-card h2{
+            color:#1d4ed8;
+            margin-top:0;
+        }
+
+        .loan-card{
+            background:#f8fbff;
+            border-left:6px solid #2563eb;
+            padding:20px;
+            border-radius:15px;
+            margin-top:18px;
+        }
+
+        .loan-card h3{
+            color:#1d4ed8;
+            margin-top:0;
+        }
+
+        .loan-card p{
+            line-height:1.6;
+            color:#475569;
+        }
+
+        .apply-btn{
+            display:inline-block;
+            margin-top:10px;
+            padding:11px 18px;
+            background:#2563eb;
+            color:white;
+            text-decoration:none;
+            border-radius:9px;
+            font-weight:bold;
+        }
+
+        .apply-btn:hover{
+            background:#1d4ed8;
+        }
+
+        ul,ol{
+            line-height:1.8;
+        }
+    </style>
+</head>
+
+<body>
+
+{% include "navbar.html" %}
+
+<div class="container">
+
+    <div class="hero">
+        <h1>💼 Business Loan Assistant</h1>
+
+        <p>
+            Explore government-supported business loans,
+            eligibility, benefits, required documents and
+            official application portals.
+        </p>
+    </div>
+
+
+    <div class="info-card">
+
+        <h2>🏦 Business Loan Options</h2>
+
+
+        <div class="loan-card">
+
+            <h3>💰 Pradhan Mantri MUDRA Yojana</h3>
+
+            <p>
+                Provides credit support to eligible micro and
+                small business activities through participating
+                financial institutions.
+            </p>
+
+            <p>
+                <b>Categories:</b>
+                Shishu, Kishor and Tarun.
+            </p>
+
+            <a href="https://www.mudra.org.in/"
+               target="_blank"
+               class="apply-btn">
+                🚀 Visit Official Website
+            </a>
+
+        </div>
+
+
+        <div class="loan-card">
+
+            <h3>🏭 PMEGP</h3>
+
+            <p>
+                Prime Minister's Employment Generation Programme
+                supports eligible individuals and organisations
+                in setting up new micro enterprises.
+            </p>
+
+            <p>
+                <b>Useful for:</b>
+                Starting eligible new micro-enterprise activities.
+            </p>
+
+            <a href="https://www.kviconline.gov.in/pmegpeportal/"
+               target="_blank"
+               class="apply-btn">
+                🚀 Visit Official Portal
+            </a>
+
+        </div>
+
+
+        <div class="loan-card">
+
+            <h3>🏢 Stand-Up India</h3>
+
+            <p>
+                Supports eligible entrepreneurs from SC/ST
+                communities and women entrepreneurs for setting
+                up greenfield enterprises.
+            </p>
+
+            <a href="https://www.standupmitra.in/"
+               target="_blank"
+               class="apply-btn">
+                🚀 Visit Official Portal
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="info-card">
+
+        <h2>📄 Commonly Required Documents</h2>
+
+        <ul>
+            <li>Aadhaar Card</li>
+            <li>PAN Card</li>
+            <li>Address Proof</li>
+            <li>Bank Account Details</li>
+            <li>Business / Project Details</li>
+            <li>Business Plan or Project Report</li>
+            <li>Income / Financial Documents, where applicable</li>
+            <li>Passport-size Photograph</li>
+        </ul>
+
+    </div>
+
+
+    <div class="info-card">
+
+        <h2>📌 Basic Process</h2>
+
+        <ol>
+            <li>Select a suitable business loan scheme.</li>
+            <li>Check the scheme and lender eligibility.</li>
+            <li>Prepare the required documents and business details.</li>
+            <li>Apply through the official portal or participating lender.</li>
+            <li>Complete verification and loan processing.</li>
+        </ol>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driving Licence Assistant</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f8ff;
+            color: #1e293b;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 1100px;
+            margin: 35px auto;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #2563eb, #4f46e5);
+            color: white;
+            padding: 30px;
+            border-radius: 22px;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 {
+            margin: 0 0 10px;
+            font-size: 32px;
+        }
+
+        .hero p {
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            margin-bottom: 20px;
+            box-shadow: 0 7px 20px rgba(0,0,0,0.08);
+        }
+
+        .card h2 {
+            color: #1d4ed8;
+            margin-top: 0;
+        }
+
+        .step {
+            padding: 15px;
+            margin-top: 12px;
+            background: #f8fafc;
+            border-radius: 12px;
+            border-left: 5px solid #2563eb;
+        }
+
+        .step h3 {
+            margin: 0 0 6px;
+        }
+
+        .step p {
+            margin: 0;
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+        .documents {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .document {
+            padding: 14px;
+            background: #eef6ff;
+            border-radius: 10px;
+        }
+
+        .apply-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 22px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .apply-btn:hover {
+            background: #1d4ed8;
+        }
+
+        @media(max-width: 700px) {
+            .documents {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+{% include "navbar.html" %}
+
+<div class="container">
+
+    <div class="hero">
+        <h1>🚗 Driving Licence Assistant</h1>
+        <p>
+            Get guidance for Learner's Licence (LLR),
+            Driving Licence (DL), required documents and application process.
+        </p>
+    </div>
+
+    <div class="card">
+        <h2>📋 Application Process</h2>
+
+        <div class="step">
+            <h3>1️⃣ Learner's Licence</h3>
+            <p>
+                Apply for a Learner's Licence and complete the required
+                test and verification process.
+            </p>
+        </div>
+
+        <div class="step">
+            <h3>2️⃣ Driving Licence</h3>
+            <p>
+                After obtaining the Learner's Licence and completing the
+                required period, apply for the Driving Licence.
+            </p>
+        </div>
+
+        <div class="step">
+            <h3>3️⃣ Driving Test</h3>
+            <p>
+                Attend the driving test at the concerned RTO
+                according to your appointment.
+            </p>
+        </div>
+
+        <div class="step">
+            <h3>4️⃣ Licence Issuance</h3>
+            <p>
+                After successful verification and test completion,
+                the Driving Licence is issued.
+            </p>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>📄 Commonly Required Documents</h2>
+
+        <div class="documents">
+            <div class="document">🪪 Identity Proof</div>
+            <div class="document">🏠 Address Proof</div>
+            <div class="document">🎂 Age / Date of Birth Proof</div>
+            <div class="document">📸 Photograph</div>
+            <div class="document">📝 Application Details</div>
+            <div class="document">🏥 Medical Certificate, where applicable</div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🌐 Official Application</h2>
+
+        <p>
+            Use the official Government of India Parivahan portal
+            for Driving Licence related services.
+        </p>
+
+        <a href="https://parivahan.gov.in/"
+           target="_blank"
+           class="apply-btn">
+            🚗 Visit Parivahan Portal
+        </a>
+    </div>
+
+</div>
+
+</body>
+</html>

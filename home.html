@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Citizen 360</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header class="home-navbar">
+
+    <div class="logo">
+        🛡️ <span>SMART CITIZEN 360</span>
+    </div>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="#about">About</a>
+        <a href="#features">Features</a>
+        <a href="/schemes">Schemes</a>
+        <a href="/complaint">Contact</a>
+    </nav>
+
+    <div class="nav-buttons">
+        <a href="/login" class="login-btn">Login</a>
+        <a href="/register" class="register-btn">Register</a>
+    </div>
+
+</header>
+
+<!-- HERO SECTION -->
+
+<section class="hero-section">
+
+    <div class="hero-left">
+
+        <h1>
+            All Your <br>
+            Citizen Services <br>
+            in One <span>Smart</span><br>
+            Platform
+        </h1>
+
+        <p>
+            AI-Powered Assistance for Documents,
+            Government Schemes, Reminders,
+            and Life Events.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="/login" class="hero-login">Login</a>
+            <a href="/register" class="hero-register">Register</a>
+        </div>
+
+    </div>
+
+    <div class="hero-right">
+
+        <img src="{{ url_for('static', filename='images/hero.png') }}"
+             alt="Smart Citizen">
+
+    </div>
+
+</section>
+
+<!-- STATS -->
+
+<section class="stats-section">
+
+    <div class="stat-card">
+        👥
+        <h3>1000+</h3>
+        <p>Happy Users</p>
+    </div>
+
+    <div class="stat-card">
+        🏛️
+        <h3>50+</h3>
+        <p>Government Schemes</p>
+    </div>
+
+    <div class="stat-card">
+        🤖
+        <h3>24x7</h3>
+        <p>AI Assistant</p>
+    </div>
+
+    <div class="stat-card">
+        🔒
+        <h3>100%</h3>
+        <p>Secure & Private</p>
+    </div>
+
+</section>
+
+<!-- FEATURES TITLE -->
+
+<section class="feature-title">
+    <p>FEATURES</p>
+    <h2>Everything You Need</h2>
+</section>
+
+</body>
+</html>

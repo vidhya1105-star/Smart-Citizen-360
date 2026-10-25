@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Smart Citizen 360</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+
+        body{
+            margin:0;
+            font-family:'Segoe UI',sans-serif;
+            background:linear-gradient(135deg,#EEF2FF,#E0E7FF,#F8FAFF);
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+
+        .login-wrapper{
+            width:100%;
+            max-width:1050px;
+            background:white;
+            border-radius:28px;
+            overflow:hidden;
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            box-shadow:0 20px 45px rgba(79,70,229,.18);
+        }
+
+        /* LEFT */
+
+        .login-left{
+            background:linear-gradient(180deg,#F5F3FF,#EEF2FF);
+            padding:40px;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+
+        .login-left img{
+            width:100%;
+            max-width:360px;
+        }
+
+        /* RIGHT */
+
+        .login-right{
+            padding:45px;
+        }
+
+        .logo{
+            display:flex;
+            align-items:center;
+            gap:10px;
+            margin-bottom:25px;
+        }
+
+        .logo img{
+            width:38px;
+        }
+
+        .logo h3{
+            margin:0;
+            color:#312E81;
+        }
+
+        h2{
+            color:#1E1B4B;
+            margin-bottom:8px;
+        }
+
+        .subtitle{
+            color:#64748B;
+            margin-bottom:25px;
+        }
+
+        .input-box{
+            margin-bottom:18px;
+        }
+
+        .input-box label{
+            display:block;
+            margin-bottom:8px;
+            font-weight:600;
+            color:#374151;
+        }
+
+        .input-box input{
+            width:100%;
+            padding:13px 15px;
+            border-radius:12px;
+            border:1px solid #CBD5E1;
+            background:#F8FAFC;
+            font-size:15px;
+            box-sizing:border-box;
+        }
+
+        .input-box input:focus{
+            outline:none;
+            border-color:#4F46E5;
+            background:white;
+            box-shadow:0 0 0 4px rgba(79,70,229,.12);
+        }
+
+        .remember-row{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:22px;
+            font-size:14px;
+        }
+
+        .remember-row a{
+            text-decoration:none;
+            color:#4F46E5;
+            font-weight:600;
+        }
+
+        .login-btn{
+            width:100%;
+            padding:14px;
+            border:none;
+            border-radius:12px;
+            background:linear-gradient(90deg,#4F46E5,#6D28D9);
+            color:white;
+            font-size:16px;
+            font-weight:bold;
+            cursor:pointer;
+        }
+
+        .login-btn:hover{
+            transform:translateY(-2px);
+            box-shadow:0 10px 20px rgba(79,70,229,.25);
+        }
+
+        .register-link{
+            text-align:center;
+            margin-top:20px;
+            color:#64748B;
+        }
+
+        .register-link a{
+            color:#6D28D9;
+            text-decoration:none;
+            font-weight:bold;
+        }
+
+        .error-box{
+            background:#FEE2E2;
+            color:#B91C1C;
+            padding:12px;
+            border-radius:10px;
+            margin-bottom:18px;
+            font-size:14px;
+        }
+
+        @media(max-width:768px){
+
+            .login-wrapper{
+                grid-template-columns:1fr;
+            }
+
+            .login-left{
+                display:none;
+            }
+
+            .login-right{
+                padding:30px;
+            }
+            .password-box{
+    position: relative;
+}
+
+.password-box input{
+    padding-right: 45px;
+}
+
+.eye-btn{
+    position:absolute;
+    right:15px;
+    top:50%;
+    transform:translateY(-50%);
+    cursor:pointer;
+    font-size:18px;
+    color:#64748B;
+    user-select:none;
+}
+
+.eye-btn:hover{
+    color: #4F46E5;
+}
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="login-wrapper">
+
+    <!-- LEFT SIDE -->
+
+    <div class="login-left">
+
+        <img src="{{ url_for('static', filename='images/login-hero.png') }}"
+             alt="Smart Citizen Illustration">
+
+    </div>
+
+    <!-- RIGHT SIDE -->
+
+    <div class="login-right">
+
+        <div class="logo">
+
+            <img src="{{ url_for('static', filename='images/logo.png') }}"
+                 alt="Logo">
+
+            <h3>SMART CITIZEN 360</h3>
+
+        </div>
+
+        <h2>Welcome Back!</h2>
+
+        <p class="subtitle">
+            Login to continue to your citizen account.
+        </p>
+
+        {% if error %}
+        <div class="error-box">
+            {{ error }}
+        </div>
+        {% endif %}
+
+        <form method="POST">
+
+            <div class="input-box">
+
+                <label>Email Address</label>
+
+                <input type="email"
+                       name="email"
+                       placeholder="Enter your email"
+                       required>
+
+            </div>
+
+            <div class="input-box password-box">
+
+    <label>Password</label>
+
+    <input type="password"
+           id="login_password"
+           name="password"
+           placeholder="Enter your password"
+           required>
+
+    <span class="eye-btn"
+          onclick="togglePassword('login_password', this)">
+        👁️
+    </span>
+
+    <p id="caps-warning"
+   style="display:none;color:#DC2626;font-size:13px;margin-top:6px;">
+   ⚠️ Caps Lock is ON
+</p>
+
+</div>
+
+            <div class="remember-row">
+
+    <label style="display:flex;align-items:center;gap:8px;">
+        <input type="checkbox" name="remember">
+        Remember Me
+    </label>
+
+    <a href="/forgot-password">Forgot Password?</a>
+
+</div>
+
+            <button type="submit" class="login-btn">
+                Login
+            </button>
+
+        </form>
+
+        <div class="register-link">
+            Don't have an account?
+            <a href="/register">Register</a>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+function togglePassword(inputId, icon) {
+
+    const input = document.getElementById(inputId);
+
+    if (input.type === "password") {
+        input.type = "text";
+        icon.textContent = "🙈";
+    } else {
+        input.type = "password";
+        icon.textContent = "👁️";
+    }
+}
+
+// Caps Lock Warning
+const passwordInput = document.getElementById("login_password");
+const warning = document.getElementById("caps-warning");
+
+passwordInput.addEventListener("keyup", function(event) {
+
+    if (event.getModifierState("CapsLock")) {
+        warning.style.display = "block";
+    } else {
+        warning.style.display = "none";
+    }
+
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Housing Schemes</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f8ff;
+            color: #1e293b;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 1100px;
+            margin: 35px auto;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #2563eb, #4f46e5);
+            color: white;
+            padding: 30px;
+            border-radius: 22px;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 {
+            margin: 0 0 10px;
+            font-size: 32px;
+        }
+
+        .hero p {
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .scheme-card {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            margin-bottom: 20px;
+            box-shadow: 0 7px 20px rgba(0,0,0,0.08);
+            border-left: 6px solid #2563eb;
+        }
+
+        .scheme-card h2 {
+            margin-top: 0;
+            color: #1d4ed8;
+        }
+
+        .scheme-card p {
+            line-height: 1.6;
+            color: #475569;
+        }
+
+        .info {
+            background: #eef6ff;
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 15px;
+        }
+
+        .apply-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 22px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .apply-btn:hover {
+            background: #1d4ed8;
+        }
+    </style>
+</head>
+
+<body>
+
+{% include "navbar.html" %}
+
+<div class="container">
+
+    <div class="hero">
+        <h1>🏠 Housing Schemes Assistant</h1>
+        <p>
+            Explore government housing support, eligibility,
+            benefits and application guidance.
+        </p>
+    </div>
+
+    <div class="scheme-card">
+
+        <h2>🏠 Pradhan Mantri Awas Yojana</h2>
+
+        <p>
+            Government housing support for eligible families
+            under applicable housing programmes.
+        </p>
+
+        <div class="info">
+            <b>🎯 Eligibility:</b>
+            Eligibility depends on household income,
+            housing status and applicable government criteria.
+        </div>
+
+        <div class="info">
+            <b>📄 Common Documents:</b>
+            Aadhaar, address proof, income-related documents
+            and other documents as applicable.
+        </div>
+
+        <a href="https://pmaymis.gov.in/"
+           target="_blank"
+           class="apply-btn">
+            🚀 Visit Official Portal
+        </a>
+
+    </div>
+
+    <div class="scheme-card">
+
+        <h2>🏡 Housing Assistance</h2>
+
+        <p>
+            Check state and central government housing programmes
+            that may provide assistance to eligible beneficiaries.
+        </p>
+
+        <div class="info">
+            <b>📋 What to Check:</b>
+            Income category, family details, existing house status
+            and applicable scheme requirements.
+        </div>
+
+        <a href="https://www.india.gov.in/"
+           target="_blank"
+           class="apply-btn">
+            🌐 Explore Government Services
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

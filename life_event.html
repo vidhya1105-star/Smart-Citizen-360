@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life Event Assistant | Smart Citizen 360</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:Arial, Helvetica, sans-serif;
+            background:#f3f7ff;
+            color:#1e293b;
+        }
+
+        .assistant-container{
+            width:92%;
+            max-width:1200px;
+            margin:30px auto;
+        }
+
+        /* HERO */
+
+        .hero-section{
+            background:linear-gradient(135deg,#2563eb,#4338ca);
+            color:white;
+            padding:35px;
+            border-radius:25px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:25px;
+            flex-wrap:wrap;
+        }
+
+        .hero-left h1{
+            font-size:34px;
+            margin-bottom:10px;
+        }
+
+        .hero-left p{
+            font-size:16px;
+            max-width:600px;
+            line-height:1.6;
+        }
+
+        .hero-icon{
+            font-size:75px;
+        }
+
+        /* SEARCH */
+
+        .search-box{
+            background:white;
+            padding:16px 20px;
+            border-radius:16px;
+            margin-bottom:25px;
+            box-shadow:0 8px 20px rgba(0,0,0,.08);
+        }
+
+        .search-box input{
+            width:100%;
+            border:none;
+            outline:none;
+            font-size:16px;
+        }
+
+        /* BANNER */
+
+        .recommend-banner{
+            display:flex;
+            align-items:center;
+            gap:18px;
+            background:#eaf3ff;
+            border-left:6px solid #2563eb;
+            padding:18px;
+            border-radius:16px;
+            margin-bottom:30px;
+        }
+
+        .banner-icon{
+            font-size:34px;
+        }
+
+        .recommend-banner h3{
+            color:#1d4ed8;
+            margin-bottom:5px;
+        }
+
+        .recommend-banner p{
+            color:#475569;
+            font-size:14px;
+        }
+
+        /* SECTION TITLE */
+
+        .section-title{
+            margin-bottom:18px;
+            color:#1d4ed8;
+            font-size:24px;
+        }
+
+        /* GRID */
+
+        .event-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+            gap:20px;
+        }
+
+        .event-card{
+            background:white;
+            border-radius:20px;
+            padding:22px;
+            text-align:center;
+            box-shadow:0 8px 18px rgba(0,0,0,.08);
+            transition:.3s;
+            cursor:pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .event-card:hover{
+            transform:translateY(-6px);
+            box-shadow:0 14px 24px rgba(37,99,235,.15);
+        }
+
+        .icon{
+            font-size:42px;
+            margin-bottom:12px;
+        }
+
+        .event-card h3{
+            color:#1d4ed8;
+            margin-bottom:8px;
+            font-size:18px;
+        }
+
+        .event-card p{
+            color:#64748b;
+            font-size:14px;
+            line-height:1.5;
+        }
+        /* Remove underline from card links */
+.event-card,
+.event-card:visited,
+.event-card:hover,
+.event-card:active {
+    text-decoration: none;
+    color: #1f2937;
+}
+
+.event-card h3,
+.event-card p {
+    text-decoration: none;
+    color: inherit;
+}
+
+.event-card h3{
+    color:#2563eb;
+    margin-top:12px;
+    margin-bottom:8px;
+    font-size:18px;
+}
+
+.event-card p{
+    color:#64748b;
+    line-height:1.5;
+}
+
+        /* MOBILE */
+
+        @media(max-width:768px){
+
+            .hero-section{
+                text-align:center;
+                justify-content:center;
+                gap:20px;
+            }
+
+            .hero-left h1{
+                font-size:28px;
+            }
+
+            .hero-icon{
+                font-size:60px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+{% include 'navbar.html' %}
+
+<div class="assistant-container">
+
+    <!-- HERO -->
+
+    <div class="hero-section">
+
+        <div class="hero-left">
+
+            <h1>🌱 Life Event Assistant</h1>
+
+            <p>
+                Your AI-powered citizen guide for scholarships, education loans,
+                business support, passport, driving licence, certificates,
+                career guidance and government schemes.
+            </p>
+
+        </div>
+
+        <div class="hero-icon">🤖</div>
+
+    </div>
+
+    <!-- SEARCH -->
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="🔍 Search Scholarship, Passport, Loan, Driving Licence..."
+            onkeyup="searchCards()">
+
+    </div>
+
+    <!-- AI BANNER -->
+
+    <div class="recommend-banner">
+
+        <div class="banner-icon">✨</div>
+
+        <div>
+
+            <h3>AI Personalized Guidance</h3>
+
+            <p>
+                Based on your citizen profile, uploaded documents and eligibility,
+                Smart Citizen 360 will recommend useful services.
+            </p>
+
+        </div>
+
+    </div>
+
+    <h2 class="section-title">Popular Life Events</h2>
+
+    <!-- CARDS -->
+
+    <div class="event-grid">
+
+        <a href="/scholarship" class="event-card">
+    <div class="event-icon">🎓</div>
+    <h3>Scholarship Finder</h3>
+    <p>Find scholarships using marks, course and family income.</p>
+</a>
+
+        <a href="/education-loan" class="event-card">
+    🏦
+    <h3>Education Loan</h3>
+    <p>Loan eligibility, documents and government support.</p>
+</a>
+
+        <a href="/business-loan" class="event-card">
+    💼
+    <h3>Business Loan</h3>
+    <p>PMEGP, Mudra Loan and startup support.</p>
+</a>
+
+        <a href="/startup-support" class="event-card">
+    🚀
+    <h3>Startup Support</h3>
+    <p>Funding, registration and startup schemes.</p>
+</a>
+        <a href="/passport" class="event-card">
+    🛂
+    <h3>Passport Assistant</h3>
+    <p>Apply passport with required documents.</p>
+</a>
+
+        <a href="{{ url_for('driving_licence') }}" class="event-card">
+    🚗
+    <h3>Driving Licence</h3>
+    <p>LLR, DL process and required documents.</p>
+</a>
+        <a href="{{ url_for('housing') }}" class="event-card">
+    🏠
+    <h3>Housing Schemes</h3>
+    <p>Government housing benefits and home loan support.</p>
+</a>
+
+        <a href="{{ url_for('career') }}" class="event-card">
+    💻
+    <h3>Career Assistant</h3>
+    <p>Jobs, internships, skill development and career guidance.</p>
+</a>
+
+       <a href="{{ url_for('certificate') }}" class="event-card">
+    📄
+    <h3>Certificate Assistant</h3>
+    <p>Income, Community, Birth and other certificates.</p>
+</a>
+
+        <a href="{{ url_for('family_benefits') }}" class="event-card">
+    👨‍👩‍👧
+    <h3>Family Benefits</h3>
+    <p>Marriage, maternity, child welfare and pension schemes.</p>
+</a>
+
+    </div>
+
+</div>
+
+<script>
+
+function searchCards(){
+
+    let input=document.getElementById("searchInput").value.toLowerCase();
+
+    let cards=document.querySelectorAll(".event-card");
+
+    cards.forEach(function(card){
+
+        let text=card.innerText.toLowerCase();
+
+        if(text.includes(input)){
+            card.style.display="block";
+        }
+        else{
+            card.style.display="none";
+        }
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>

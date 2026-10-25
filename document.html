@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Document Locker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="login-container">
+
+<h1>Document Locker</h1>
+
+<p>Upload your important documents securely.</p>
+
+<form method="POST" enctype="multipart/form-data">
+
+
+<select
+name="document_name"
+required
+style="width:90%;padding:12px;margin:12px 0;border:1px solid #ccc;border-radius:8px;">
+
+<option value="">Select Document</option>
+
+<option>Aadhaar Card</option>
+<option>PAN Card</option>
+<option>Driving License</option>
+<option>Passport</option>
+<option>Voter ID</option>
+<option>Community Certificate</option>
+<option>Income Certificate</option>
+<option>Birth Certificate</option>
+<option>Degree Certificate</option>
+<option>Transfer Certificate</option>
+
+</select>
+
+<input
+type="file"
+name="document"
+required>
+
+<br><br>
+
+<button type="submit">
+Upload Document
+</button>
+
+</form>
+
+</div>
+
+</body>
+</html>

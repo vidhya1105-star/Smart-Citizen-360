@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Benefits Assistant</title>
+
+    <style>
+        *{
+            box-sizing:border-box;
+        }
+
+        body{
+            margin:0;
+            font-family:Arial,sans-serif;
+            background:#f4f8ff;
+            color:#1e293b;
+        }
+
+        .container{
+            width:92%;
+            max-width:1100px;
+            margin:35px auto;
+        }
+
+        .hero{
+            background:linear-gradient(135deg,#ec4899,#be185d);
+            color:white;
+            padding:30px;
+            border-radius:20px;
+            margin-bottom:25px;
+        }
+
+        .hero h1{
+            margin:0 0 10px;
+            font-size:32px;
+        }
+
+        .hero p{
+            margin:0;
+            line-height:1.6;
+        }
+
+        .card{
+            background:white;
+            padding:22px;
+            border-radius:16px;
+            margin-bottom:20px;
+            box-shadow:0 6px 18px rgba(0,0,0,.08);
+            border-left:6px solid #ec4899;
+        }
+
+        .card h2{
+            margin-top:0;
+            color:#be185d;
+        }
+
+        .benefit-item{
+            background:#fdf2f8;
+            padding:16px;
+            border-radius:12px;
+            margin-top:15px;
+        }
+
+        .benefit-item h3{
+            margin:0 0 8px;
+            color:#9d174d;
+        }
+
+        .benefit-item p{
+            margin:6px 0;
+            color:#475569;
+            line-height:1.5;
+        }
+
+        .apply-btn{
+            display:inline-block;
+            margin-top:12px;
+            padding:10px 18px;
+            background:#ec4899;
+            color:white;
+            text-decoration:none;
+            border-radius:10px;
+            font-weight:bold;
+        }
+
+        .apply-btn:hover{
+            background:#be185d;
+        }
+
+        ul{
+            padding-left:20px;
+            line-height:1.8;
+        }
+    </style>
+</head>
+
+<body>
+
+{% include "navbar.html" %}
+
+<div class="container">
+
+    <!-- HERO -->
+    <div class="hero">
+        <h1>👨‍👩‍👧 Family Benefits Assistant</h1>
+        <p>
+            Find marriage assistance, maternity benefits, child welfare,
+            pension schemes and family welfare programs.
+        </p>
+    </div>
+
+    <!-- BENEFITS -->
+    <div class="card">
+
+        <h2>❤️ Popular Family Welfare Schemes</h2>
+
+        <div class="benefit-item">
+            <h3>💍 Marriage Assistance Scheme</h3>
+            <p>Financial assistance for eligible women under Tamil Nadu marriage assistance schemes.</p>
+        </div>
+
+        <div class="benefit-item">
+            <h3>🤱 Maternity Benefit Scheme</h3>
+            <p>Support for eligible pregnant women and mothers through government maternity schemes.</p>
+        </div>
+
+        <div class="benefit-item">
+            <h3>👶 Child Welfare Schemes</h3>
+            <p>Benefits for newborn children, girl child welfare and nutrition support programs.</p>
+        </div>
+
+        <div class="benefit-item">
+            <h3>👵 Widow Pension</h3>
+            <p>Monthly pension support for eligible widows.</p>
+        </div>
+
+        <div class="benefit-item">
+            <h3>👴 Old Age Pension</h3>
+            <p>Monthly pension assistance for eligible senior citizens.</p>
+        </div>
+
+        <div class="benefit-item">
+            <h3>♿ Disability Pension</h3>
+            <p>Financial support for eligible persons with disabilities.</p>
+        </div>
+
+    </div>
+
+    <!-- DOCUMENTS -->
+    <div class="card">
+
+        <h2>📄 Commonly Required Documents</h2>
+
+        <ul>
+            <li>Aadhaar Card</li>
+            <li>Ration Card</li>
+            <li>Income Certificate</li>
+            <li>Community Certificate (if applicable)</li>
+            <li>Marriage Certificate / Birth Certificate (if applicable)</li>
+            <li>Bank Passbook</li>
+            <li>Passport Size Photograph</li>
+        </ul>
+
+    </div>
+
+    <!-- OFFICIAL PORTAL -->
+    <div class="card">
+
+        <h2>🌐 Official Tamil Nadu Social Welfare Services</h2>
+
+        <p>
+            Apply for family welfare schemes and assistance through the
+            Tamil Nadu Government Social Welfare Department.
+        </p>
+
+        <a href="https://www.tnsocialwelfare.tn.gov.in/"
+           target="_blank"
+           class="apply-btn">
+            🚀 Visit Official Portal
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

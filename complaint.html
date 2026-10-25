@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help & Support | Smart Citizen 360</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+
+<div class="login-container">
+
+    <h1>Help & Support</h1>
+
+    <p>Report an issue or request support</p>
+
+    <form method="POST">
+
+        <input type="text"
+               name="fullname"
+               placeholder="Enter Your Full Name"
+               required>
+
+        <select name="department" required
+        style="width:90%;padding:12px;margin:12px 0;border:1px solid #ccc;border-radius:8px;">
+
+            <option value="">Select Issue Category</option>
+
+            <option value="Login Issue">🔐 Login Issue</option>
+
+            <option value="Document Upload">📂 Document Upload</option>
+
+            <option value="AI Chatbot">🤖 AI Chatbot</option>
+
+            <option value="Government Schemes">📋 Government Schemes</option>
+
+            <option value="Voice Assistant">🎤 Voice Assistant</option>
+
+            <option value="Notifications">🔔 Notifications</option>
+
+            <option value="Bug Report">🐞 Bug Report</option>
+
+            <option value="Feature Request">⭐ Feature Request</option>
+
+            <option value="Other">❓ Other</option>
+
+        </select>
+
+        <textarea
+        name="complaint"
+        placeholder="Describe your issue..."
+        required
+        style="width:90%;height:120px;padding:12px;margin:12px 0;border:1px solid #ccc;border-radius:8px;"></textarea>
+
+        <button type="submit">
+            Submit Request
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

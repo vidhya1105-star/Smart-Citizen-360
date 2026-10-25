@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scholarship Finder</title>
+
+    <style>
+        *{
+            box-sizing:border-box;
+        }
+
+        body{
+            margin:0;
+            font-family:Arial,sans-serif;
+            background:#f4f8ff;
+        }
+
+        .container{
+            width:92%;
+            max-width:1100px;
+            margin:30px auto;
+        }
+
+        /* HERO */
+        .hero{
+            background:linear-gradient(135deg,#2563eb,#4f46e5);
+            color:white;
+            padding:30px;
+            border-radius:20px;
+            margin-bottom:25px;
+        }
+
+        .hero h1{
+            margin:0 0 10px;
+            font-size:32px;
+        }
+
+        .hero p{
+            margin:0;
+            opacity:0.95;
+        }
+
+        /* FORM */
+        .form-card{
+            background:white;
+            padding:25px;
+            border-radius:18px;
+            box-shadow:0 8px 20px rgba(0,0,0,.08);
+        }
+
+        label{
+            display:block;
+            margin-top:15px;
+            margin-bottom:8px;
+            font-weight:bold;
+            color:#1e3a8a;
+        }
+
+        input,select{
+            width:100%;
+            padding:12px;
+            border-radius:10px;
+            border:1px solid #d1d5db;
+            font-size:15px;
+        }
+
+        input:focus,
+        select:focus{
+            outline:none;
+            border-color:#2563eb;
+            box-shadow:0 0 8px rgba(37,99,235,.2);
+        }
+
+        button{
+            width:100%;
+            margin-top:22px;
+            padding:14px;
+            border:none;
+            border-radius:12px;
+            background:#2563eb;
+            color:white;
+            font-size:16px;
+            font-weight:bold;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background:#1d4ed8;
+        }
+
+        /* RESULT SECTION */
+
+        .result-section{
+            margin-top:35px;
+        }
+
+        .result-section h2{
+            color:#1d4ed8;
+            margin-bottom:20px;
+        }
+
+        .result-card{
+            background:white;
+            border-left:6px solid #2563eb;
+            padding:20px;
+            border-radius:16px;
+            margin-bottom:18px;
+            box-shadow:0 6px 18px rgba(0,0,0,.08);
+        }
+
+        .result-card h3{
+            margin:0 0 12px;
+            color:#1d4ed8;
+        }
+
+        .amount-badge{
+            display:inline-block;
+            background:#16a34a;
+            color:white;
+            padding:8px 15px;
+            border-radius:25px;
+            font-weight:bold;
+            margin-bottom:12px;
+        }
+
+        .result-card p{
+            color:#475569;
+            line-height:1.6;
+        }
+
+        .apply-btn{
+            display:inline-block;
+            margin-top:15px;
+            background:#2563eb;
+            color:white;
+            padding:10px 18px;
+            border-radius:10px;
+            text-decoration:none;
+            font-weight:bold;
+        }
+
+        .apply-btn:hover{
+            background:#1d4ed8;
+        }
+
+        /* NO RESULT */
+
+        .no-result{
+            margin-top:30px;
+            background:#fff4e5;
+            border-left:6px solid orange;
+            padding:20px;
+            border-radius:15px;
+        }
+
+        /* MOBILE */
+
+        @media(max-width:700px){
+            .hero{
+                padding:20px;
+            }
+
+            .hero h1{
+                font-size:26px;
+            }
+
+            .container{
+                width:95%;
+            }
+        }
+        .apply-btn{
+    display:inline-block;
+    margin-top:12px;
+    padding:10px 16px;
+    background:#2563eb;
+    color:white;
+    text-decoration:none;
+    border-radius:8px;
+    font-weight:bold;
+}
+
+    </style>
+</head>
+
+<body>
+
+    {% include "navbar.html" %}
+
+    <div class="container">
+
+        <!-- HERO -->
+        <div class="hero">
+            <h1>🎓 Scholarship Finder</h1>
+            <p>
+                Discover scholarships based on your course,
+                marks, family income and state.
+            </p>
+        </div>
+
+        <!-- FORM -->
+        <form method="POST" class="form-card">
+
+            <label>Education / Course</label>
+
+            <select name="course" required>
+                <option value="">Select Course</option>
+                <option value="10th">10th</option>
+                <option value="12th">12th</option>
+                <option value="BCA">BCA</option>
+                <option value="B.Sc">B.Sc</option>
+                <option value="B.Com">B.Com</option>
+                <option value="B.E">B.E / B.Tech</option>
+                <option value="MBA">MBA</option>
+                <option value="MCA">MCA</option>
+            </select>
+
+            <label>Percentage (%)</label>
+
+            <input
+                type="number"
+                name="percentage"
+                placeholder="Example : 92"
+                min="0"
+                max="100"
+                required>
+
+            <label>Annual Family Income (₹)</label>
+
+            <input
+                type="number"
+                name="income"
+                placeholder="Example : 250000"
+                required>
+
+            <label>State</label>
+
+            <select name="state" required>
+                <option value="">Select State</option>
+                <option value="Tamil Nadu">Tamil Nadu</option>
+                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                <option value="Karnataka">Karnataka</option>
+                <option value="Kerala">Kerala</option>
+            </select>
+
+            <button type="submit">
+                🔍 Find My Scholarships
+            </button>
+
+        </form>
+
+        <!-- RESULTS FROM FLASK -->
+
+        {% if scholarships %}
+
+        <div class="result-section">
+
+            <h2>🎉 Eligible Scholarships For You</h2>
+
+            {% for scheme in scholarships %}
+
+            <div class="result-card">
+
+    <h3>{{ scheme.name }}</h3>
+
+    <div class="amount-badge">
+        {{ scheme.amount }}
+    </div>
+
+    <p><b>🎯 AI Match:</b> {{ scheme.match }}%</p>
+
+    <p><b>📍 State:</b> {{ scheme.state }}</p>
+
+    <p><b>🏷️ Category:</b> {{ scheme.category }}</p>
+
+    <p><b>✅ Eligibility:</b> {{ scheme.eligibility }}</p>
+
+    <p><b>📄 Required Documents:</b> {{ scheme.documents }}</p>
+
+    <p><b>⏰ Last Date:</b> {{ scheme.last_date }}</p>
+
+    <a href="{{ scheme.apply_link }}"
+       target="_blank"
+       class="apply-btn">
+        🚀 Apply Now
+    </a>
+
+</div>
+            {% endfor %}
+
+        </div>
+
+        {% elif request.method == "POST" %}
+
+        <div class="no-result">
+
+            <h3>😔 No Matching Scholarship Found</h3>
+
+            <p>
+                Try changing your marks, income or course details to view more scholarships.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</body>
+</html>
